@@ -1,0 +1,2623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AQA GCSE Organisation Revision Quiz — Mr Leek Science</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #f1f5f9;
+      color: #0f172a;
+    }
+    .option-card {
+      transition: all 0.16s ease;
+    }
+    .option-card:hover:not(:disabled) {
+      transform: translateY(-1px);
+    }
+    .fade-in {
+      animation: fadeIn 0.22s ease-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col bg-slate-100 text-slate-900">
+
+  <!-- TOP NAVIGATION BAR -->
+  <header class="bg-slate-900 text-white shadow-md sticky top-0 z-30 border-b border-slate-800">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3.5">
+        <img
+          src="mr leek science.jpg"
+          onerror="this.onerror=null; this.src='mrleeksciencelogo.png';"
+          alt="Mr Leek Science"
+          class="h-12 sm:h-14 w-auto object-contain rounded-xl bg-white p-0.5 shadow-sm"
+        />
+        <div>
+          <h1 class="text-base sm:text-lg font-extrabold tracking-tight text-white leading-snug">
+            AQA GCSE Organisation Revision Quiz
+          </h1>
+          <p class="text-xs sm:text-sm text-teal-300 font-medium">
+            Topic 2: Principles of Organisation, Digestion, Circulatory System, Non-Communicable Diseases &amp; Plant Tissues
+          </p>
+        </div>
+      </div>
+
+      <div id="headerControls" class="hidden flex items-center gap-2 sm:gap-3">
+        <span id="headerStudentBadge" class="hidden sm:inline-flex items-center gap-1.5 bg-slate-800 text-slate-200 text-xs font-semibold px-3 py-1.5 rounded-full border border-slate-700">
+          <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+          <span id="headerStudentName">Student</span>
+        </span>
+        <button
+          type="button"
+          onclick="confirmReturnHome()"
+          class="text-xs sm:text-sm font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-2 rounded-xl border border-slate-700 transition"
+        >
+          Menu
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT CONTAINER -->
+  <main class="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8">
+
+    <!-- ==================== VIEW 1: START SCREEN ==================== -->
+    <section id="startScreen" class="fade-in">
+      <div class="bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden">
+        <!-- Top Banner -->
+        <div class="bg-gradient-to-r from-slate-900 via-teal-900 to-emerald-900 px-6 py-6 sm:px-8 text-white">
+          <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm text-teal-200 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-2.5">
+            Topic 2 &bull; Paper 1 Revision (8461 / 8464)
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">
+            Configure Your Organisation Quiz
+          </h2>
+          <p class="text-slate-200 text-sm sm:text-base mt-1.5 max-w-2xl">
+            Enter your name, choose your tier, select either all Organisation topics or Required Practicals only, and pick your question count.
+          </p>
+        </div>
+
+        <form id="quizSetupForm" onsubmit="handleStartQuiz(event)" novalidate class="p-6 sm:p-8 space-y-7">
+
+          <!-- 1. STUDENT DETAILS ROW (Zero helper/caption text underneath inputs) -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+            <div>
+              <label for="studentNameInput" class="block text-sm font-bold text-slate-800 mb-1.5">
+                Student Name <span class="text-rose-600 font-extrabold">*</span>
+              </label>
+              <input
+                type="text"
+                id="studentNameInput"
+                placeholder="Enter your full name"
+                maxlength="50"
+                autocomplete="name"
+                oninput="clearValidationError()"
+                class="w-full rounded-xl border-2 border-slate-300 bg-slate-50 focus:bg-white focus:border-teal-600 focus:ring-2 focus:ring-teal-500/20 px-4 py-3 text-slate-900 font-medium outline-none transition"
+              />
+            </div>
+
+            <div>
+              <label for="studentEmailInput" class="block text-sm font-bold text-slate-800 mb-1.5">
+                Email Address <span class="text-slate-400 font-medium">(Optional)</span>
+              </label>
+              <input
+                type="email"
+                id="studentEmailInput"
+                placeholder="e.g. student@school.co.uk"
+                maxlength="80"
+                autocomplete="email"
+                class="w-full rounded-xl border-2 border-slate-300 bg-slate-50 focus:bg-white focus:border-teal-600 focus:ring-2 focus:ring-teal-500/20 px-4 py-3 text-slate-900 font-medium outline-none transition"
+              />
+            </div>
+          </div>
+
+          <!-- 2. SELECT TIER / PATHWAY -->
+          <div>
+            <div class="flex items-center justify-between mb-2.5">
+              <span class="text-sm font-bold text-slate-800">Select Tier / Pathway</span>
+              <span id="tierCountHint" class="text-xs font-semibold text-teal-700 bg-teal-50 px-2.5 py-1 rounded-full border border-teal-200">
+                Combined Science Higher Selected
+              </span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5" id="tierSelectorGroup">
+              <!-- Foundation -->
+              <button
+                type="button"
+                data-tier="foundation"
+                onclick="selectTier('foundation')"
+                class="tier-btn text-left p-4 rounded-2xl border-2 border-slate-200 bg-slate-50 hover:border-teal-400 transition relative flex flex-col justify-between"
+              >
+                <div class="flex items-start justify-between gap-2">
+                  <div>
+                    <span class="inline-block text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-sky-100 text-sky-800 mb-1.5">
+                      Combined 8464
+                    </span>
+                    <h3 class="text-base font-extrabold text-slate-900">Foundation Tier</h3>
+                  </div>
+                  <span class="tier-check w-6 h-6 rounded-full border-2 border-slate-300 flex items-center justify-center text-white text-xs font-bold shrink-0">
+                    ✓
+                  </span>
+                </div>
+                <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                  Core digestion, enzymes, heart &amp; blood vessels, CHD treatments, cancer, plant tissues &amp; RP4/RP5 (Grades 1–5).
+                </p>
+              </button>
+
+              <!-- Higher (Default Active) -->
+              <button
+                type="button"
+                data-tier="higher"
+                onclick="selectTier('higher')"
+                class="tier-btn text-left p-4 rounded-2xl border-2 border-teal-600 bg-teal-50/60 shadow-sm transition relative flex flex-col justify-between"
+              >
+                <div class="flex items-start justify-between gap-2">
+                  <div>
+                    <span class="inline-block text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-teal-100 text-teal-800 mb-1.5">
+                      Combined 8464
+                    </span>
+                    <h3 class="text-base font-extrabold text-slate-900">Higher Tier</h3>
+                  </div>
+                  <span class="tier-check w-6 h-6 rounded-full border-2 border-teal-600 bg-teal-600 flex items-center justify-center text-white text-xs font-bold shrink-0">
+                    ✓
+                  </span>
+                </div>
+                <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                  Includes enzyme rate calculations (1000/t), cardiac output maths, potometer data &amp; risk factor analysis (Grades 4–9).
+                </p>
+              </button>
+
+              <!-- Separate Biology -->
+              <button
+                type="button"
+                data-tier="separate"
+                onclick="selectTier('separate')"
+                class="tier-btn text-left p-4 rounded-2xl border-2 border-slate-200 bg-slate-50 hover:border-teal-400 transition relative flex flex-col justify-between"
+              >
+                <div class="flex items-start justify-between gap-2">
+                  <div>
+                    <span class="inline-block text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-purple-100 text-purple-800 mb-1.5">
+                      Triple 8461
+                    </span>
+                    <h3 class="text-base font-extrabold text-slate-900">Separate Biology</h3>
+                  </div>
+                  <span class="tier-check w-6 h-6 rounded-full border-2 border-slate-300 flex items-center justify-center text-white text-xs font-bold shrink-0">
+                    ✓
+                  </span>
+                </div>
+                <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                  Full Higher syllabus plus Separate-only plant diseases, nitrate/magnesium ion deficiencies &amp; deeper physiology.
+                </p>
+              </button>
+            </div>
+          </div>
+
+          <!-- 3. QUIZ FOCUS (Dedicated Box for Required Practicals Only) -->
+          <div>
+            <span class="block text-sm font-bold text-slate-800 mb-2.5">Quiz Focus</span>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+              <!-- All Organisation Topics -->
+              <button
+                type="button"
+                id="modeAllBtn"
+                onclick="selectMode('all')"
+                class="text-left p-4 rounded-2xl border-2 border-teal-600 bg-teal-50/60 shadow-sm transition flex items-start gap-3.5"
+              >
+                <div id="modeAllIcon" class="w-10 h-10 rounded-xl bg-teal-600 text-white flex items-center justify-center shrink-0 mt-0.5">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+                  </svg>
+                </div>
+                <div class="flex-1">
+                  <div class="flex items-center justify-between">
+                    <h4 class="font-extrabold text-slate-900 text-sm sm:text-base">All Organisation Topics</h4>
+                    <span id="modeAllCheck" class="text-teal-600 font-extrabold text-sm">✓</span>
+                  </div>
+                  <p class="text-xs text-slate-600 mt-1">
+                    Covers digestion, enzymes, heart &amp; blood, CHD, non-communicable diseases, cancer, plant transport &amp; practicals.
+                  </p>
+                </div>
+              </button>
+
+              <!-- Dedicated Separate Box: Required Practicals Only -->
+              <button
+                type="button"
+                id="modeRpBtn"
+                onclick="selectMode('rp')"
+                class="text-left p-4 rounded-2xl border-2 border-slate-200 bg-amber-50/40 hover:border-amber-400 transition flex items-start gap-3.5"
+              >
+                <div id="modeRpIcon" class="w-10 h-10 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center shrink-0 mt-0.5">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3v4.5m4.5-4.5v4.5M6 7.5h12M7.5 7.5l-1.5 11.25A2.25 2.25 0 008.25 21h7.5a2.25 2.25 0 002.25-2.25L16.5 7.5" />
+                  </svg>
+                </div>
+                <div class="flex-1">
+                  <div class="flex items-center justify-between gap-2">
+                    <h4 class="font-extrabold text-slate-900 text-sm sm:text-base">Required Practicals Only</h4>
+                    <span id="modeRpCheck" class="hidden text-amber-600 font-extrabold text-sm">✓</span>
+                  </div>
+                  <p id="modeRpDesc" class="text-xs text-slate-600 mt-1">
+                    Focused practical drill: RP4 Food Tests (starch, sugars, protein, lipids) &amp; RP5 Effect of pH on Amylase Activity.
+                  </p>
+                </div>
+              </button>
+            </div>
+          </div>
+
+          <!-- 4. NUMBER OF QUESTIONS -->
+          <div>
+            <div class="flex items-center justify-between mb-2.5">
+              <span class="text-sm font-bold text-slate-800">Number of Questions</span>
+              <span id="poolAvailabilityText" class="text-xs font-medium text-slate-500">
+                108 unique questions in bank
+              </span>
+            </div>
+            <div class="grid grid-cols-5 gap-2 sm:gap-3" id="countSelectorGroup">
+              <button type="button" data-count="10" onclick="selectCount(10)" class="count-btn py-3 px-2 rounded-xl border-2 border-slate-200 bg-slate-50 hover:border-teal-400 text-slate-800 font-extrabold text-sm sm:text-base transition">
+                10
+              </button>
+              <button type="button" data-count="20" onclick="selectCount(20)" class="count-btn py-3 px-2 rounded-xl border-2 border-teal-600 bg-teal-600 text-white font-extrabold text-sm sm:text-base shadow-sm transition">
+                20
+              </button>
+              <button type="button" data-count="30" onclick="selectCount(30)" class="count-btn py-3 px-2 rounded-xl border-2 border-slate-200 bg-slate-50 hover:border-teal-400 text-slate-800 font-extrabold text-sm sm:text-base transition">
+                30
+              </button>
+              <button type="button" data-count="50" onclick="selectCount(50)" class="count-btn py-3 px-2 rounded-xl border-2 border-slate-200 bg-slate-50 hover:border-teal-400 text-slate-800 font-extrabold text-sm sm:text-base transition">
+                50
+              </button>
+              <button type="button" data-count="80" onclick="selectCount(80)" class="count-btn py-3 px-2 rounded-xl border-2 border-slate-200 bg-slate-50 hover:border-teal-400 text-slate-800 font-extrabold text-sm sm:text-base transition">
+                80
+              </button>
+            </div>
+          </div>
+
+          <!-- 5. BOTTOM ACTION FOOTER -->
+          <div class="pt-4 border-t border-slate-200 space-y-3">
+            <div id="validationAlert" class="hidden rounded-xl bg-rose-50 border border-rose-300 text-rose-800 px-4 py-3 text-sm font-semibold flex items-center gap-2">
+              <svg class="w-5 h-5 text-rose-600 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+              </svg>
+              <span>Please enter your Student Name before starting the quiz.</span>
+            </div>
+
+            <button
+              type="submit"
+              id="startQuizBtn"
+              class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white font-extrabold text-base sm:text-lg shadow-lg shadow-teal-600/20 transition transform active:scale-[0.99] flex items-center justify-center gap-2"
+            >
+              <span id="startBtnLabel">Start Higher Tier Quiz</span>
+              <span aria-hidden="true">&rarr;</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 2: ACTIVE QUIZ ==================== -->
+    <section id="quizScreen" class="hidden fade-in space-y-5">
+      <!-- Progress & Metadata Header -->
+      <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200">
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span id="quizTierBadge" class="text-xs font-extrabold uppercase tracking-wider px-2.5 py-1 rounded-lg bg-teal-100 text-teal-800">
+              Higher Tier
+            </span>
+            <span id="quizTopicBadge" class="text-xs font-semibold px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700">
+              Digestion &amp; Enzymes
+            </span>
+            <span id="quizRpBadge" class="hidden text-xs font-extrabold px-2.5 py-1 rounded-lg bg-amber-100 text-amber-800 border border-amber-300">
+              Required Practical
+            </span>
+          </div>
+
+          <div class="flex items-center gap-4 text-sm font-bold text-slate-700">
+            <span id="questionCounterText">Question 1 of 20</span>
+            <span class="text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-lg border border-emerald-200">
+              Score: <span id="liveScoreText">0</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
+          <div id="quizProgressBar" class="h-full bg-gradient-to-r from-teal-500 to-emerald-500 transition-all duration-300" style="width: 5%;"></div>
+        </div>
+      </div>
+
+      <!-- Question Card -->
+      <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-md border border-slate-200">
+        <h3 id="questionPrompt" class="text-lg sm:text-xl font-bold text-slate-900 leading-relaxed mb-6">
+          Loading question...
+        </h3>
+
+        <!-- Options List -->
+        <div id="optionsContainer" class="space-y-3"></div>
+
+        <!-- Instant AQA Mark-Scheme Feedback Box -->
+        <div id="feedbackBox" class="hidden mt-6 rounded-2xl p-5 border-2 fade-in">
+          <div class="flex items-start gap-3">
+            <div id="feedbackIcon" class="w-7 h-7 rounded-full flex items-center justify-center font-extrabold text-sm shrink-0 mt-0.5"></div>
+            <div class="flex-1">
+              <h4 id="feedbackHeading" class="font-extrabold text-base"></h4>
+              <p id="feedbackExplanation" class="text-sm mt-1.5 leading-relaxed"></p>
+            </div>
+          </div>
+
+          <div class="mt-5 flex justify-end">
+            <button
+              type="button"
+              id="nextQuestionBtn"
+              onclick="handleNextQuestion()"
+              class="px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm sm:text-base transition flex items-center gap-2 shadow"
+            >
+              <span id="nextBtnText">Next Question</span>
+              <span>&rarr;</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 3: DIAGNOSTIC REPORT ==================== -->
+    <section id="resultsScreen" class="hidden fade-in space-y-6">
+      <!-- Summary Hero Card -->
+      <div class="bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden">
+        <div class="bg-gradient-to-r from-slate-900 via-teal-900 to-emerald-900 p-6 sm:p-8 text-white">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <span class="inline-block text-xs font-bold uppercase tracking-wider bg-white/15 text-teal-200 px-3 py-1 rounded-full mb-2">
+                AQA GCSE Organisation Diagnostic Report
+              </span>
+              <h2 id="reportStudentTitle" class="text-2xl sm:text-3xl font-extrabold tracking-tight">
+                Diagnostic Report: Student
+              </h2>
+              <p id="reportMetaSubtitle" class="text-sm text-slate-200 mt-1">
+                Higher Tier &bull; All Organisation Topics
+              </p>
+            </div>
+
+            <div class="flex items-center gap-3 shrink-0">
+              <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-5 py-3.5 text-center">
+                <div id="reportPercentage" class="text-3xl sm:text-4xl font-extrabold text-emerald-300">
+                  0%
+                </div>
+                <div id="reportFraction" class="text-xs sm:text-sm font-semibold text-slate-200 mt-0.5">
+                  0 / 20 Correct
+                </div>
+              </div>
+              <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-4 py-3.5 text-center">
+                <div id="reportGradeBadge" class="text-2xl sm:text-3xl font-extrabold text-amber-300">
+                  G5
+                </div>
+                <div class="text-[11px] font-semibold text-slate-200 mt-0.5 uppercase tracking-wide">
+                  Est. Grade
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Buttons Row -->
+        <div class="p-5 sm:p-6 bg-slate-50 border-b border-slate-200 flex flex-wrap items-center gap-3">
+          <button
+            type="button"
+            id="retryMissedBtn"
+            onclick="startMissedQuestionsQuiz()"
+            class="hidden px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold text-sm shadow-sm transition flex items-center gap-2"
+          >
+            <span>Retry Missed Questions (<span id="missedCountLabel">0</span>)</span>
+          </button>
+
+          <button
+            type="button"
+            onclick="copyResultsSummary()"
+            class="px-4 py-2.5 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold text-sm shadow-sm transition flex items-center gap-2"
+          >
+            <span id="copyBtnLabel">Copy Results Summary</span>
+          </button>
+
+          <a
+            id="emailResultsLink"
+            href="#"
+            class="px-4 py-2.5 rounded-xl bg-white hover:bg-slate-100 text-slate-800 border border-slate-300 font-bold text-sm transition flex items-center gap-2"
+          >
+            <span>Email Results</span>
+          </a>
+
+          <button
+            type="button"
+            onclick="returnToMenu()"
+            class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-900 text-white font-bold text-sm transition ml-auto"
+          >
+            Back to Start
+          </button>
+        </div>
+
+        <!-- Topic-by-Topic Breakdown -->
+        <div class="p-6 sm:p-8">
+          <h3 class="text-lg font-extrabold text-slate-900 mb-1">Topic-by-Topic Performance Breakdown</h3>
+          <p class="text-xs sm:text-sm text-slate-500 mb-5">
+            Identify your strongest areas in Organisation and prioritise topics needing further revision.
+          </p>
+          <div id="topicBreakdownContainer" class="space-y-4"></div>
+        </div>
+      </div>
+
+      <!-- Question Review List -->
+      <div class="bg-white rounded-2xl shadow-md border border-slate-200 p-6 sm:p-8">
+        <h3 class="text-lg font-extrabold text-slate-900 mb-4">Question-by-Question Review</h3>
+        <div id="questionReviewList" class="space-y-4"></div>
+      </div>
+    </section>
+
+    <!-- Custom In-App Confirmation Modal (No browser confirm/alert) -->
+    <div id="confirmModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+      <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200">
+        <h3 class="text-lg font-extrabold text-slate-900">Return to Quiz Menu?</h3>
+        <p class="text-sm text-slate-600 mt-2">
+          Your current quiz progress will be lost if you return to the start screen.
+        </p>
+        <div class="mt-6 flex justify-end gap-3">
+          <button type="button" onclick="closeConfirmModal()" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-sm">
+            Continue Quiz
+          </button>
+          <button type="button" onclick="returnToMenu()" class="px-4 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-sm">
+            Yes, Exit Quiz
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="bg-white border-t border-slate-200 py-5 mt-12">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-500">
+      <span class="font-semibold text-slate-700">Mr Leek Science &bull; AQA GCSE Biology (8461 &amp; 8464)</span>
+      <span>Topic 2: Organisation Revision &amp; Required Practicals</span>
+    </div>
+  </footer>
+
+  <script>
+    // =========================================================================
+    // 1. COMPREHENSIVE AQA GCSE ORGANISATION QUESTION BANK (108 QUESTIONS)
+    //    Tagged by tiers: ['foundation', 'higher', 'separate'],
+    //    topic, and isPractical: true | false.
+    // =========================================================================
+    const QUESTION_BANK = [
+      // -------------------- PRINCIPLES OF ORGANISATION (6) --------------------
+      {
+        id: 1,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Principles of Organisation',
+        isPractical: false,
+        question: 'What is the correct order of biological organisation from smallest to largest in a multicellular organism?',
+        options: [
+          'Cell → Tissue → Organ → Organ system → Organism',
+          'Tissue → Cell → Organ system → Organ → Organism',
+          'Cell → Organ → Tissue → Organ system → Organism',
+          'Organelle → Organ → Tissue → Cell → Organism'
+        ],
+        answer: 0,
+        explanation: 'Cells are the basic building blocks; similar cells form tissues, tissues work together in organs, organs form organ systems, and organ systems make up the whole organism.'
+      },
+      {
+        id: 2,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Principles of Organisation',
+        isPractical: false,
+        question: 'How is a biological "tissue" defined in the AQA GCSE Biology specification?',
+        options: [
+          'A group of cells with a similar structure and function working together',
+          'A single specialised cell carrying out multiple functions',
+          'Several different organs working together to digest food',
+          'A collection of unrelated organs inside the chest cavity'
+        ],
+        answer: 0,
+        explanation: 'A tissue is a group of cells with similar structure and function (e.g. muscular tissue, glandular tissue, epithelial tissue).'
+      },
+      {
+        id: 3,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Principles of Organisation',
+        isPractical: false,
+        question: 'Which three tissues make up the stomach as an organ, and what are their respective roles?',
+        options: [
+          'Muscular tissue (churns food), glandular tissue (secretes digestive juices), and epithelial tissue (covers inside and outside surfaces)',
+          'Xylem tissue (transports water), phloem tissue (transports sugar), and meristem tissue (grows)',
+          'Palisade tissue (photosynthesises), spongy tissue (gas exchange), and epidermal tissue (protects)',
+          'Ciliated tissue (wafts mucus), adipose tissue (stores fat), and cartilage (reduces friction)'
+        ],
+        answer: 0,
+        explanation: 'The stomach is an organ containing muscular tissue to churn food, glandular tissue to produce enzymes and acid, and epithelial tissue to line its surfaces.'
+      },
+      {
+        id: 4,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Principles of Organisation',
+        isPractical: false,
+        question: 'What is an organ?',
+        options: [
+          'An aggregation of different tissues performing specific functions',
+          'A group of identical organelles inside a nucleus',
+          'A single cell adapted for absorbing mineral ions',
+          'A network of blood vessels carrying oxygenated blood only'
+        ],
+        answer: 0,
+        explanation: 'Organs are aggregations of different tissues working together to perform specific functions (e.g. heart, stomach, leaf).'
+      },
+      {
+        id: 5,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Principles of Organisation',
+        isPractical: false,
+        question: 'Which statement best describes an organ system?',
+        options: [
+          'A group of organs working together to perform a particular biological function',
+          'A single type of tissue lining the small intestine',
+          'A collection of enzymes that break down starch',
+          'A group of bacteria living inside the large intestine'
+        ],
+        answer: 0,
+        explanation: 'Organs are organised into organ systems (such as the digestive system or circulatory system), which work together to form organisms.'
+      },
+      {
+        id: 6,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Principles of Organisation',
+        isPractical: false,
+        question: 'Which of the following is an example of a plant organ rather than a plant tissue?',
+        options: ['A leaf', 'Palisade mesophyll', 'Xylem', 'Epidermis'],
+        answer: 0,
+        explanation: 'A leaf (along with roots and stems) is a plant organ composed of several different tissues including epidermis, palisade mesophyll, spongy mesophyll, xylem, and phloem.'
+      },
+
+      // -------------------- DIGESTIVE SYSTEM & ENZYMES (22) --------------------
+      {
+        id: 7,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Digestion & Enzymes',
+        isPractical: false,
+        question: 'What is an enzyme in biological terms?',
+        options: [
+          'A biological catalyst made of protein that speeds up chemical reactions without being used up',
+          'A carbohydrate molecule that stores energy in the liver',
+          'A lipid hormone secreted by the pancreas into the blood',
+          'An acid produced in the stomach to dissolve starch'
+        ],
+        answer: 0,
+        explanation: 'Enzymes are biological catalysts (large protein molecules) that speed up specific metabolic and digestive reactions without being permanently changed or used up.'
+      },
+      {
+        id: 8,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Digestion & Enzymes',
+        isPractical: false,
+        question: 'According to the "lock and key" theory of enzyme action, why does each enzyme only catalyse one specific reaction?',
+        options: [
+          'The enzyme has an active site with a unique, specific shape that is complementary to only one substrate molecule',
+          'Each enzyme is kept inside a separate organ so substrates never meet the wrong enzyme',
+          'Enzymes change their amino acid sequence every time they meet a different food molecule',
+          'Substrates are made of protein while enzymes are made of starch'
+        ],
+        answer: 0,
+        explanation: 'In the lock and key model, the substrate (key) fits specifically into the complementary shape of the enzyme’s active site (lock).'
+      },
+      {
+        id: 9,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Digestion & Enzymes',
+        isPractical: false,
+        question: 'What happens to a human enzyme when it is heated to 75 °C?',
+        options: [
+          'The bonds holding the protein structure break, changing the shape of the active site so the enzyme becomes denatured and the substrate no longer fits',
+          'The enzyme is killed because enzymes are living cells',
+          'The rate of reaction increases infinitely because particles have more kinetic energy',
+          'The enzyme freezes and becomes solid'
+        ],
+        answer: 0,
+        explanation: 'High temperatures disrupt the forces holding the protein chain together, altering the active site’s shape permanently (denaturation). Never say an enzyme is "killed".'
+      },
+      {
+        id: 10,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Digestion & Enzymes',
+        isPractical: false,
+        question: 'Why does the rate of an enzyme-controlled reaction increase as temperature rises from 10 °C to 37 °C?',
+        options: [
+          'Reactant and enzyme molecules gain more kinetic energy, move faster, and collide more frequently with enough energy to react',
+          'The active site expands so larger substrates can squeeze inside',
+          'New enzyme molecules are created by heat energy',
+          'The optimum pH shifts from acidic to alkaline'
+        ],
+        answer: 0,
+        explanation: 'Below the optimum temperature, increasing temperature increases kinetic energy, leading to more frequent successful collisions between enzyme active sites and substrate molecules.'
+      },
+      {
+        id: 11,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Digestion & Enzymes',
+        isPractical: false,
+        question: 'How does an extreme pH (too acidic or too alkaline away from an enzyme’s optimum) affect enzyme activity?',
+        options: [
+          'It interferes with the forces holding the protein together, changing the shape of the active site and denaturing the enzyme',
+          'It turns the enzyme into glucose and amino acids',
+          'It increases the kinetic energy of the substrate molecules',
+          'It has no effect unless the temperature is also above 60 °C'
+        ],
+        answer: 0,
+        explanation: 'Extreme pH levels alter the charges and bonds maintaining the enzyme’s 3D structure, changing the active site shape (denaturation).'
+      },
+      {
+        id: 12,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Digestion & Enzymes',
+        isPractical: false,
+        question: 'What do carbohydrase enzymes (such as amylase) break carbohydrates down into?',
+        options: ['Simple sugars (such as glucose and maltose)', 'Amino acids', 'Fatty acids and glycerol', 'Mineral ions and water'],
+        answer: 0,
+        explanation: 'Carbohydrases break down large insoluble carbohydrate polymers (like starch) into soluble simple sugars.'
+      },
+      {
+        id: 13,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Digestion & Enzymes',
+        isPractical: false,
+        question: 'Which three organs in the human digestive system produce the carbohydrase enzyme amylase?',
+        options: [
+          'Salivary glands, pancreas, and small intestine',
+          'Stomach, liver, and gall bladder',
+          'Oesophagus, large intestine, and rectum',
+          'Liver, pancreas, and stomach'
+        ],
+        answer: 0,
+        explanation: 'Amylase is produced in the salivary glands (acting in the mouth), the pancreas, and the small intestine.'
+      },
+      {
+        id: 14,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Digestion & Enzymes',
+        isPractical: false,
+        question: 'What are the products when protease enzymes digest proteins?',
+        options: ['Amino acids', 'Fatty acids and glycerol', 'Simple sugars', 'Starch and glycogen'],
+        answer: 0,
+        explanation: 'Proteases catalyse the breakdown of protein molecules into soluble amino acids.'
+      },
+      {
+        id: 15,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Digestion & Enzymes',
+        isPractical: false,
+        question: 'Which three organs produce protease enzymes in the human digestive system?',
+        options: [
+          'Stomach (pepsin), pancreas, and small intestine',
+          'Salivary glands, liver, and large intestine',
+          'Gall bladder, oesophagus, and appendix',
+          'Mouth, liver, and rectum'
+        ],
+        answer: 0,
+        explanation: 'Proteases are produced by the stomach (where pepsin works in acidic conditions), the pancreas, and the small intestine.'
+      },
+      {
+        id: 16,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Digestion & Enzymes',
+        isPractical: false,
+        question: 'What do lipase enzymes break lipids (fats and oils) down into?',
+        options: ['Glycerol and fatty acids', 'Amino acids and glucose', 'Simple sugars and water', 'Bile salts and cholesterol'],
+        answer: 0,
+        explanation: 'Lipases (produced in the pancreas and small intestine) break down lipids into glycerol and three fatty acids.'
+      },
+      {
+        id: 17,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Digestion & Enzymes',
+        isPractical: false,
+        question: 'Why must large insoluble food molecules be digested before they can be used by body cells?',
+        options: [
+          'They must be broken down into small, soluble molecules so they can be absorbed through the wall of the small intestine into the bloodstream',
+          'Large molecules cannot pass through the oesophagus into the stomach',
+          'Only soluble molecules contain chemical energy',
+          'Large food molecules would block the windpipe'
+        ],
+        answer: 0,
+        explanation: 'Digestion converts large insoluble polymers into small soluble molecules that can diffuse or be actively transported across the gut wall into the blood.'
+      },
+      {
+        id: 18,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Digestion & Enzymes',
+        isPractical: false,
+        question: 'Where is bile made, where is it stored, and into which organ is it released?',
+        options: [
+          'Made in the liver, stored in the gall bladder, and released into the small intestine',
+          'Made in the gall bladder, stored in the pancreas, and released into the stomach',
+          'Made in the stomach, stored in the liver, and released into the large intestine',
+          'Made in the pancreas, stored in the liver, and released into the mouth'
+        ],
+        answer: 0,
+        explanation: 'Bile is synthesised in the liver, concentrated and stored in the gall bladder, and released via the bile duct into the small intestine.'
+      },
+      {
+        id: 19,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Digestion & Enzymes',
+        isPractical: false,
+        question: 'What are the two main functions of bile in digestion?',
+        options: [
+          'It is alkaline to neutralise hydrochloric acid from the stomach (creating optimum pH for small intestine enzymes) AND it emulsifies fats to increase surface area for lipase',
+          'It contains lipase and amylase enzymes to chemically digest fats and starch',
+          'It makes the small intestine strongly acidic to activate pepsin',
+          'It absorbs water from undigested food in the colon'
+        ],
+        answer: 0,
+        explanation: 'Bile contains NO enzymes. It neutralises stomach acid (providing optimum alkaline pH for pancreatic/intestinal enzymes) and emulsifies large fat droplets into tiny droplets, increasing surface area for faster lipase action.'
+      },
+      {
+        id: 20,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Digestion & Enzymes',
+        isPractical: false,
+        question: 'How does emulsification by bile speed up the digestion of lipids?',
+        options: [
+          'It breaks large fat droplets into many smaller droplets, greatly increasing the surface area for lipase enzymes to act on',
+          'It chemically splits triglycerides directly into glycerol and fatty acids without enzymes',
+          'It lowers the temperature of the small intestine to 25 °C',
+          'It turns insoluble fats into soluble glucose'
+        ],
+        answer: 0,
+        explanation: 'Emulsification is a physical process that disperses large fat globules into tiny droplets, giving lipase a much larger surface area to work on.'
+      },
+      {
+        id: 21,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Digestion & Enzymes',
+        isPractical: false,
+        question: 'Why does the stomach produce hydrochloric acid?',
+        options: [
+          'To kill harmful bacteria in food and provide the acidic optimum pH (around pH 2) for the protease enzyme pepsin',
+          'To emulsify fats into tiny droplets',
+          'To provide an alkaline environment for salivary amylase',
+          'To absorb amino acids into the bloodstream'
+        ],
+        answer: 0,
+        explanation: 'Hydrochloric acid destroys pathogens ingested with food and maintains the low pH required for stomach protease (pepsin) to function at its maximum rate.'
+      },
+      {
+        id: 22,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Digestion & Enzymes',
+        isPractical: false,
+        question: 'What happens to the products of digestion once they have been absorbed into the body cells?',
+        options: [
+          'They are used to build new carbohydrates, lipids, and proteins, and some glucose is used in respiration',
+          'They are all excreted immediately in faeces',
+          'They are converted back into hydrochloric acid in the liver',
+          'They are pumped out through the alveoli in the lungs'
+        ],
+        answer: 0,
+        explanation: 'Absorbed glucose, amino acids, fatty acids, and glycerol are assimilated to synthesise new cellular macromolecules (proteins, lipids, glycogen), while glucose is also respired to transfer energy.'
+      },
+      {
+        id: 23,
+        tiers: ['higher', 'separate'],
+        topic: 'Digestion & Enzymes',
+        isPractical: false,
+        question: 'In an experiment, a lipase solution breaks down 0.45 g of lipid in 15 minutes. Calculate the mean rate of lipid digestion in g/min.',
+        options: ['0.03 g/min', '6.75 g/min', '0.30 g/min', '33.3 g/min'],
+        answer: 0,
+        explanation: 'Mean rate = mass of lipid digested ÷ time taken = 0.45 g ÷ 15 min = 0.03 g/min.'
+      },
+      {
+        id: 24,
+        tiers: ['higher', 'separate'],
+        topic: 'Digestion & Enzymes',
+        isPractical: false,
+        question: 'Why does salivary amylase stop working once swallowed food enters the stomach?',
+        options: [
+          'The strongly acidic hydrochloric acid (pH 2) in the stomach denatures salivary amylase by changing the shape of its active site',
+          'The stomach is too cold for amylase to collide with starch',
+          'All the starch has already been turned into amino acids in the mouth',
+          'Bile in the stomach neutralises the amylase'
+        ],
+        answer: 0,
+        explanation: 'Salivary amylase has an optimum pH around 7; the low pH of stomach acid disrupts its protein structure and denatures its active site.'
+      },
+      {
+        id: 25,
+        tiers: ['higher', 'separate'],
+        topic: 'Digestion & Enzymes',
+        isPractical: false,
+        question: 'If a patient has a blocked bile duct preventing bile from entering the small intestine, how will their digestion be affected?',
+        options: [
+          'Fats will be digested much more slowly because lipids are not emulsified and stomach acid is not neutralised to the optimum alkaline pH for pancreatic enzymes',
+          'Protein digestion in the stomach will stop completely because pepsin requires bile',
+          'Starch digestion in the mouth will stop immediately',
+          'Water absorption in the large intestine will increase dangerously'
+        ],
+        answer: 0,
+        explanation: 'Without bile entering the small intestine, fats remain in large globules (low surface area for lipase) and acidic chyme from the stomach is not neutralised.'
+      },
+      {
+        id: 26,
+        tiers: ['higher', 'separate'],
+        topic: 'Digestion & Enzymes',
+        isPractical: false,
+        question: 'When fatty acids are released during the digestion of milk lipids by lipase, what happens to the pH of the reaction mixture?',
+        options: [
+          'The pH decreases (becomes more acidic) as acidic fatty acid molecules are produced',
+          'The pH increases (becomes more alkaline)',
+          'The pH stays completely unchanged',
+          'The pH rises to 14'
+        ],
+        answer: 0,
+        explanation: 'Lipase breaks down neutral lipids into glycerol and fatty acids; the release of fatty acids lowers the pH of the solution.'
+      },
+      {
+        id: 27,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Digestion & Enzymes',
+        isPractical: false,
+        question: 'What is the main function of the large intestine (colon) in the human digestive system?',
+        options: [
+          'Absorbing excess water from undigested food material to form faeces',
+          'Secreting bile and digestive enzymes to break down fats',
+          'Absorbing glucose and amino acids through millions of villi',
+          'Churning food with hydrochloric acid'
+        ],
+        answer: 0,
+        explanation: 'By the time food reaches the large intestine, nutrients have been absorbed in the small intestine; the large intestine absorbs remaining water.'
+      },
+      {
+        id: 28,
+        tiers: ['higher', 'separate'],
+        topic: 'Digestion & Enzymes',
+        isPractical: false,
+        question: 'How do villi and microvilli in the small intestine ensure rapid absorption of digested food molecules?',
+        options: [
+          'They provide a huge surface area, have a single-cell-thick epithelial wall for a short diffusion distance, and contain a rich capillary network to maintain a steep concentration gradient',
+          'They have thick muscular walls lined with waterproof mucus',
+          'They contain chloroplasts to convert glucose into starch',
+          'They contract rapidly to pump blood back to the heart'
+        ],
+        answer: 0,
+        explanation: 'Villi and microvilli maximise surface area, offer a one-cell-thick diffusion path, and maintain a steep concentration gradient via dense blood capillaries and mitochondria for active transport.'
+      },
+
+      // -------------------- REQUIRED PRACTICAL 4: FOOD TESTS (12) --------------------
+      {
+        id: 29,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Required Practical: Food Tests',
+        isPractical: true,
+        question: 'Which chemical reagent is used to test a food sample for the presence of starch, and what is a positive result?',
+        options: [
+          'Iodine solution; turns from orange-brown to blue-black',
+          'Benedict’s solution; turns from blue to brick-red when heated',
+          'Biuret reagent; turns from blue to purple/lilac',
+          'Ethanol; forms a cloudy white emulsion'
+        ],
+        answer: 0,
+        explanation: 'Iodine solution changes colour from yellow/orange-brown to blue-black in the presence of starch (no heating required).'
+      },
+      {
+        id: 30,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Required Practical: Food Tests',
+        isPractical: true,
+        question: 'How do you test a food solution for reducing sugars (such as glucose)?',
+        options: [
+          'Add blue Benedict’s solution and heat in a water bath at 75–80 °C for several minutes; a positive result forms a green, yellow, orange, or brick-red precipitate',
+          'Add iodine solution at room temperature; a positive result turns blue-black',
+          'Add Biuret solution and shake gently; a positive result turns lilac',
+          'Add cold ethanol and distilled water; a positive result forms a cloudy white layer'
+        ],
+        answer: 0,
+        explanation: 'Benedict’s test requires heating with Benedict’s solution in a water bath. Depending on sugar concentration, the blue solution forms a green → yellow → orange → brick-red precipitate.'
+      },
+      {
+        id: 31,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Required Practical: Food Tests',
+        isPractical: true,
+        question: 'In the Benedict’s test for sugars, what does a brick-red precipitate indicate compared to a green or yellow colour?',
+        options: [
+          'A high concentration of reducing sugar is present (Benedict’s is semi-quantitative)',
+          'The food contains pure protein and zero sugar',
+          'The water bath was not heated high enough',
+          'Starch has been completely broken down into lipids'
+        ],
+        answer: 0,
+        explanation: 'Benedict’s test is semi-quantitative: blue = none, green = trace, yellow/orange = moderate, brick-red precipitate = high concentration of reducing sugar.'
+      },
+      {
+        id: 32,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Required Practical: Food Tests',
+        isPractical: true,
+        question: 'Which reagent is used to test for proteins in a food sample, and what colour change shows a positive result?',
+        options: [
+          'Biuret solution (potassium hydroxide + copper sulfate); turns from blue to purple/lilac',
+          'Iodine solution; turns from brown to blue-black',
+          'Benedict’s solution; turns from blue to brick-red',
+          'Sudan III stain; forms a red-stained oil layer on top'
+        ],
+        answer: 0,
+        explanation: 'Biuret reagent (an alkaline copper sulfate solution) changes from pale blue to lilac/purple in the presence of peptide bonds in proteins (no heating needed).'
+      },
+      {
+        id: 33,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Required Practical: Food Tests',
+        isPractical: true,
+        question: 'Describe how to carry out the ethanol emulsion test for lipids (fats and oils) and state the positive observation.',
+        options: [
+          'Shake the food sample with ethanol to dissolve lipids, then pour into cold distilled water; a cloudy white emulsion forms if lipids are present',
+          'Heat the food sample with ethanol over a direct Bunsen flame until it boils red',
+          'Add iodine solution to the lipid and observe a purple ring',
+          'Add Biuret reagent and look for fizzing bubbles'
+        ],
+        answer: 0,
+        explanation: 'Lipids dissolve in ethanol but not water; adding water causes dissolved lipids to precipitate out as tiny droplets forming a milky/cloudy white emulsion.'
+      },
+      {
+        id: 34,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Required Practical: Food Tests',
+        isPractical: true,
+        question: 'When using Sudan III stain to test an unfiltered food mixture for lipids, what is observed if lipids are present?',
+        options: [
+          'The mixture separates into two layers and the top lipid layer is stained bright red',
+          'The entire test tube turns deep blue-black',
+          'A brick-red solid sinks to the bottom after boiling',
+          'The solution turns completely colourless'
+        ],
+        answer: 0,
+        explanation: 'Sudan III is a fat-soluble dye that stains lipids red, forming a distinct red-stained layer floating on top of the water.'
+      },
+      {
+        id: 35,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Required Practical: Food Tests',
+        isPractical: true,
+        question: 'What essential safety precaution must be taken when using ethanol during the lipid food test?',
+        options: [
+          'Keep ethanol well away from any naked Bunsen burner flames because ethanol is highly flammable',
+          'Heat the ethanol directly in a Bunsen flame to make it evaporate faster',
+          'Drink distilled water immediately after handling ethanol',
+          'Perform the test inside a closed incubator at 37 °C'
+        ],
+        answer: 0,
+        explanation: 'Ethanol is flammable, so all Bunsen burners in the laboratory must be turned off before using ethanol.'
+      },
+      {
+        id: 36,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Required Practical: Food Tests',
+        isPractical: true,
+        question: 'Why is Biuret solution considered a chemical hazard in Required Practical 4, and how is the risk minimised?',
+        options: [
+          'It contains corrosive sodium/potassium hydroxide (alkali) and irritant copper sulfate, so safety goggles must be worn and spills washed off skin immediately',
+          'It is radioactive and requires a lead-lined apron',
+          'It explodes when exposed to daylight',
+          'It releases toxic chlorine gas when mixed with water'
+        ],
+        answer: 0,
+        explanation: 'Biuret solution contains corrosive alkali (KOH/NaOH), so wearing eye protection (safety goggles) is mandatory.'
+      },
+      {
+        id: 37,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Required Practical: Food Tests',
+        isPractical: true,
+        question: 'Why should solid foods (such as bread or cheese) be ground up with a pestle and mortar and mixed with distilled water before carrying out food tests?',
+        options: [
+          'To break open cells and dissolve/suspend the nutrients in liquid so the chemical reagents can react evenly with them',
+          'To sterilise the food so no bacteria grow in the test tube',
+          'To convert all starch into glucose before testing',
+          'To remove all lipids from the sample'
+        ],
+        answer: 0,
+        explanation: 'Grinding with distilled water releases cellular contents into a liquid suspension/solution so reagents can mix and show clear colour changes.'
+      },
+      {
+        id: 38,
+        tiers: ['higher', 'separate'],
+        topic: 'Required Practical: Food Tests',
+        isPractical: true,
+        question: 'A student tests a solution of pure sucrose (table sugar) with Benedict’s solution and heats it, and it stays blue. After boiling the sucrose with dilute hydrochloric acid and neutralising it, Benedict’s test gives a brick-red precipitate. Why?',
+        options: [
+          'Sucrose is a non-reducing sugar; acid hydrolysis breaks it down into the reducing sugars glucose and fructose which then react with Benedict’s solution',
+          'Hydrochloric acid turns into brick-red copper oxide when heated',
+          'Sucrose is actually a protein that needs acid to unfold',
+          'Benedict’s solution only works in strongly acidic solutions'
+        ],
+        answer: 0,
+        explanation: 'Benedict’s test detects reducing sugars (like glucose). Non-reducing sugars like sucrose must first be hydrolysed into monosaccharides before giving a positive Benedict’s result.'
+      },
+      {
+        id: 39,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Required Practical: Food Tests',
+        isPractical: true,
+        question: 'A sample of milk is tested with all four food reagents. Which set of results would you expect?',
+        options: [
+          'Iodine: stays brown (no starch); Benedict’s: brick-red/orange (contains lactose sugar); Biuret: lilac/purple (contains protein); Ethanol: cloudy white emulsion (contains lipids)',
+          'Iodine: blue-black; Benedict’s: stays blue; Biuret: stays blue; Ethanol: stays clear',
+          'Iodine: stays brown; Benedict’s: stays blue; Biuret: stays blue; Ethanol: stays clear',
+          'Iodine: purple; Benedict’s: blue-black; Biuret: brick-red; Ethanol: green'
+        ],
+        answer: 0,
+        explanation: 'Milk contains lactose (a reducing sugar), casein/whey proteins, and milk fats (lipids), but no plant starch.'
+      },
+      {
+        id: 40,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Required Practical: Food Tests',
+        isPractical: true,
+        question: 'Why is a thermostatically controlled water bath used instead of a direct Bunsen flame when heating Benedict’s solution in a test tube?',
+        options: [
+          'To heat the mixture evenly and safely without boiling over or spitting hot chemicals out of the test tube',
+          'Because Bunsen burners cannot heat water above 30 °C',
+          'To keep the Benedict’s solution below 10 °C',
+          'To prevent light from reaching the test tube'
+        ],
+        answer: 0,
+        explanation: 'A water bath provides controlled, even heating around 80 °C and prevents bumping/spitting of hot liquid from narrow test tubes.'
+      },
+
+      // -------------------- REQUIRED PRACTICAL 5: AMYLASE & pH (12) --------------------
+      {
+        id: 41,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Required Practical: Amylase & pH',
+        isPractical: true,
+        question: 'In Required Practical 5 (investigating the effect of pH on amylase activity), how do you know when all the starch has been broken down?',
+        options: [
+          'When a drop of the reaction mixture added to iodine solution on a spotting tile remains yellow-brown instead of turning blue-black',
+          'When the mixture in the test tube turns bright purple',
+          'When bubbles of oxygen stop rising from the starch solution',
+          'When a brick-red precipitate forms on the spotting tile'
+        ],
+        answer: 0,
+        explanation: 'Iodine turns blue-black when starch is present; once amylase has digested all the starch into maltose, the iodine remains its original orange/yellow-brown colour.'
+      },
+      {
+        id: 42,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Required Practical: Amylase & pH',
+        isPractical: true,
+        question: 'In the amylase and pH required practical, what are the independent, dependent, and key control variables?',
+        options: [
+          'Independent: pH of buffer solution; Dependent: time taken for starch to be completely digested (or rate of reaction); Control: temperature (35 °C), volume & concentration of starch and amylase',
+          'Independent: time taken; Dependent: pH of buffer solution; Control: type of spotting tile',
+          'Independent: temperature of water bath; Dependent: volume of iodine; Control: pH of buffer',
+          'Independent: concentration of starch; Dependent: colour of buffer; Control: stopwatch brand'
+        ],
+        answer: 0,
+        explanation: 'The experimenter alters the pH using buffer solutions (independent variable) and measures the time taken for starch disappearance (dependent variable), keeping temperature and reagent volumes/concentrations constant.'
+      },
+      {
+        id: 43,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Required Practical: Amylase & pH',
+        isPractical: true,
+        question: 'Why are the amylase solution, starch solution, and pH buffer placed in a water bath at 35 °C for 5 minutes BEFORE mixing them together?',
+        options: [
+          'To allow all solutions to reach the same controlled temperature (35 °C) before the reaction begins so temperature does not affect the initial rate',
+          'To denature the amylase before adding it to the starch',
+          'To evaporate half of the water from the buffer solution',
+          'To sterilise the spotting tile'
+        ],
+        answer: 0,
+        explanation: 'Equilibrating the solutions in the water bath ensures the reaction takes place at a constant temperature from t = 0 seconds.'
+      },
+      {
+        id: 44,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Required Practical: Amylase & pH',
+        isPractical: true,
+        question: 'Why is a buffer solution added to the amylase and starch mixture in Required Practical 5?',
+        options: [
+          'To set and maintain a specific, constant pH throughout the reaction',
+          'To stain the starch blue-black inside the test tube',
+          'To supply extra glucose to speed up the enzyme',
+          'To absorb excess heat from the water bath'
+        ],
+        answer: 0,
+        explanation: 'Buffer solutions resist changes in pH, keeping the reaction mixture at the chosen target pH (e.g. pH 5, 6, 7, 8, 9).'
+      },
+      {
+        id: 45,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Required Practical: Amylase & pH',
+        isPractical: true,
+        question: 'At pH 7, the iodine on the spotting tile stays yellow-brown after 40 seconds, whereas at pH 5 it takes 140 seconds, and at pH 3 it still turns blue-black after 10 minutes. What is the optimum pH of this amylase?',
+        options: ['pH 7', 'pH 5', 'pH 3', 'pH 10'],
+        answer: 0,
+        explanation: 'The shortest time taken to digest all the starch (40 s at pH 7) corresponds to the fastest rate of reaction, showing the optimum pH is around pH 7.'
+      },
+      {
+        id: 46,
+        tiers: ['higher', 'separate'],
+        topic: 'Required Practical: Amylase & pH',
+        isPractical: true,
+        question: 'In Required Practical 5, starch is completely broken down in 50 seconds at pH 7. Calculate the rate of reaction using the formula Rate = 1000 ÷ time.',
+        options: ['20 s⁻¹', '0.05 s⁻¹', '50,000 s⁻¹', '2.0 s⁻¹'],
+        answer: 0,
+        explanation: 'Rate = 1000 ÷ 50 s = 20 s⁻¹ (or using 1 ÷ time = 1 ÷ 50 = 0.02 s⁻¹).'
+      },
+      {
+        id: 47,
+        tiers: ['higher', 'separate'],
+        topic: 'Required Practical: Amylase & pH',
+        isPractical: true,
+        question: 'At pH 6, all starch is digested in 80 seconds. Using Rate = 1 ÷ time, what is the rate of reaction?',
+        options: ['0.0125 s⁻¹', '12.5 s⁻¹', '0.08 s⁻¹', '80 s⁻¹'],
+        answer: 0,
+        explanation: 'Rate = 1 ÷ 80 s = 0.0125 s⁻¹.'
+      },
+      {
+        id: 48,
+        tiers: ['higher', 'separate'],
+        topic: 'Required Practical: Amylase & pH',
+        isPractical: true,
+        question: 'What are two major sources of error in the standard spotting-tile method for Required Practical 5, and how can the method be improved?',
+        options: [
+          'Sampling only every 10–30 seconds gives an approximate end-time, and judging the exact colour change by eye is subjective; improve by sampling every 5 seconds or using a colorimeter',
+          'Iodine reacts with the plastic spotting tile; improve by heating the tile over a Bunsen burner',
+          'Amylase digests the glass pipette; improve by using wooden splints',
+          'Starch evaporates at 35 °C; improve by freezing the test tube'
+        ],
+        answer: 0,
+        explanation: 'Discontinuous sampling intervals limit precision and visual colour judgement is subjective; shorter intervals (e.g. every 5 s) and a colorimeter improve precision and objectivity.'
+      },
+      {
+        id: 49,
+        tiers: ['higher', 'separate'],
+        topic: 'Required Practical: Amylase & pH',
+        isPractical: true,
+        question: 'Why must the glass stirring rod or dropping pipette be rinsed with distilled water (or kept dedicated to one tube) between sampling drops onto the spotting tile?',
+        options: [
+          'To prevent cross-contamination of starch or active amylase from previous samples or different pH tubes',
+          'To dilute the iodine on the spotting tile',
+          'To cool down the spotting tile below 10 °C',
+          'To neutralise the buffer solution'
+        ],
+        answer: 0,
+        explanation: 'Rinsing avoids transferring trace starch from an earlier time point (which would give a false blue-black result) or contaminating other pH mixtures.'
+      },
+      {
+        id: 50,
+        tiers: ['higher', 'separate'],
+        topic: 'Required Practical: Amylase & pH',
+        isPractical: true,
+        question: 'If a student wanted to find the optimum pH of amylase more accurately after finding the fastest rate was at pH 7 (testing pH 5, 6, 7, 8, 9), what should they do next?',
+        options: [
+          'Repeat the investigation using smaller pH intervals between pH 6 and pH 8 (e.g., pH 6.2, 6.4, 6.6, 6.8, 7.0, 7.2, 7.4)',
+          'Test pH 1, pH 2, pH 12, and pH 14',
+          'Double the volume of starch without changing the buffer',
+          'Lower the temperature of the water bath to 5 °C'
+        ],
+        answer: 0,
+        explanation: 'Testing narrower pH intervals bracketing the initial peak (e.g. every 0.2 pH units between 6 and 8) pinpoints the true optimum pH more accurately.'
+      },
+      {
+        id: 51,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Required Practical: Amylase & pH',
+        isPractical: true,
+        question: 'Why does the iodine on the spotting tile still turn blue-black after 15 minutes when the reaction is carried out at pH 2 or pH 11?',
+        options: [
+          'At extreme acidic or alkaline pH, the amylase is denatured so no starch is broken down into maltose',
+          'At pH 2 and pH 11, iodine turns blue-black even without starch',
+          'The amylase works too fast and creates new starch',
+          'The water bath was set to 35 °C instead of 100 °C'
+        ],
+        answer: 0,
+        explanation: 'Extreme pH denatures the amylase active site, preventing enzyme-substrate complexes from forming, so all the starch remains undigested.'
+      },
+      {
+        id: 52,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Required Practical: Amylase & pH',
+        isPractical: true,
+        question: 'What sugar is produced when amylase breaks down starch during Required Practical 5?',
+        options: ['Maltose (a simple sugar)', 'Glycerol', 'Amino acids', 'Cellulose'],
+        answer: 0,
+        explanation: 'Amylase hydrolyses starch (a polysaccharide) into the disaccharide simple sugar maltose.'
+      },
+
+      // -------------------- HEART, BLOOD VESSELS & BLOOD (22) --------------------
+      {
+        id: 53,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Heart, Blood Vessels & Blood',
+        isPractical: false,
+        question: 'Why is the human circulatory system described as a "double circulatory system"?',
+        options: [
+          'Blood passes through the heart twice for every complete circuit of the body: one loop pumps blood to the lungs, and the second loop pumps oxygenated blood to the rest of the body',
+          'Humans have two separate hearts on the left and right sides of the chest',
+          'Every artery has two parallel tubes carrying blood in opposite directions',
+          'Blood contains both red blood cells and white blood cells'
+        ],
+        answer: 0,
+        explanation: 'In a double circulatory system, the right side of the heart pumps deoxygenated blood to the lungs for gas exchange, and the left side pumps oxygenated blood at high pressure to the body tissues.'
+      },
+      {
+        id: 54,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Heart, Blood Vessels & Blood',
+        isPractical: false,
+        question: 'Which blood vessel brings deoxygenated blood from the body into the right atrium of the heart?',
+        options: ['Vena cava', 'Aorta', 'Pulmonary artery', 'Pulmonary vein'],
+        answer: 0,
+        explanation: 'The vena cava carries deoxygenated blood from the body tissues back into the right atrium.'
+      },
+      {
+        id: 55,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Heart, Blood Vessels & Blood',
+        isPractical: false,
+        question: 'Which blood vessel carries deoxygenated blood from the right ventricle to the lungs?',
+        options: ['Pulmonary artery', 'Pulmonary vein', 'Aorta', 'Coronary artery'],
+        answer: 0,
+        explanation: 'The pulmonary artery carries deoxygenated blood away from the right ventricle to the lungs (it is the only artery carrying deoxygenated blood).'
+      },
+      {
+        id: 56,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Heart, Blood Vessels & Blood',
+        isPractical: false,
+        question: 'Which blood vessel returns oxygenated blood from the lungs into the left atrium of the heart?',
+        options: ['Pulmonary vein', 'Pulmonary artery', 'Vena cava', 'Aorta'],
+        answer: 0,
+        explanation: 'The pulmonary vein brings oxygenated blood from the lungs into the left atrium (it is the only vein carrying oxygenated blood).'
+      },
+      {
+        id: 57,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Heart, Blood Vessels & Blood',
+        isPractical: false,
+        question: 'Which major blood vessel carries oxygenated blood out of the left ventricle to supply the rest of the body?',
+        options: ['Aorta', 'Vena cava', 'Pulmonary artery', 'Pulmonary vein'],
+        answer: 0,
+        explanation: 'The aorta leaves the thick-walled left ventricle and distributes oxygenated blood at high pressure around the body.'
+      },
+      {
+        id: 58,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Heart, Blood Vessels & Blood',
+        isPractical: false,
+        question: 'Why is the muscular wall of the left ventricle much thicker than the wall of the right ventricle?',
+        options: [
+          'The left ventricle must pump blood at high pressure all around the entire body, whereas the right ventricle only pumps blood a short distance to the lungs',
+          'The left ventricle holds twice as much blood as the right ventricle',
+          'The right ventricle does not contain cardiac muscle tissue',
+          'Blood entering the left ventricle is solid and harder to push'
+        ],
+        answer: 0,
+        explanation: 'Pumping blood through the systemic circulation to the whole body requires much higher pressure (and therefore stronger muscular contraction) than pumping to the nearby lungs.'
+      },
+      {
+        id: 59,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Heart, Blood Vessels & Blood',
+        isPractical: false,
+        question: 'What is the function of the valves inside the heart and in veins?',
+        options: [
+          'To prevent the backflow of blood, ensuring blood flows in one direction only',
+          'To pump blood faster when exercising',
+          'To filter bacteria out of the blood plasma',
+          'To add oxygen to red blood cells'
+        ],
+        answer: 0,
+        explanation: 'Heart valves (between atria and ventricles, and at the base of the aorta/pulmonary artery) and vein valves prevent blood flowing backwards.'
+      },
+      {
+        id: 60,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Heart, Blood Vessels & Blood',
+        isPractical: false,
+        question: 'What is the role of the coronary arteries?',
+        options: [
+          'They branch off the aorta to supply the heart muscle itself with oxygenated blood and glucose for respiration',
+          'They carry deoxygenated blood from the brain back to the right atrium',
+          'They connect the left atrium directly to the right atrium',
+          'They carry digestive enzymes from the pancreas to the liver'
+        ],
+        answer: 0,
+        explanation: 'Coronary arteries wrap around the outside of the heart to supply cardiac muscle cells with oxygen and glucose needed for continuous aerobic respiration.'
+      },
+      {
+        id: 61,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Heart, Blood Vessels & Blood',
+        isPractical: false,
+        question: 'Where is the natural pacemaker located in the human heart, and what does it do?',
+        options: [
+          'A group of cells in the right atrium wall that controls the resting heart rate by sending regular electrical impulses causing the heart muscle to contract',
+          'A valve in the left ventricle that pumps blood into the aorta',
+          'A bundle of nerves in the lungs that controls breathing rate',
+          'A gland in the neck that secretes adrenaline'
+        ],
+        answer: 0,
+        explanation: 'The natural pacemaker is a group of specialised cells in the wall of the right atrium that generates electrical signals to coordinate regular heartbeats.'
+      },
+      {
+        id: 62,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Heart, Blood Vessels & Blood',
+        isPractical: false,
+        question: 'How does an artificial pacemaker help a patient with an irregular heartbeat (arrhythmia)?',
+        options: [
+          'It is an electrical device implanted under the skin with a wire to the heart that produces regular electrical impulses to keep the heart beating steadily',
+          'It widens narrowed coronary arteries using a wire mesh tube',
+          'It lowers blood cholesterol levels by blocking liver enzymes',
+          'It replaces a damaged left ventricle with a mechanical pump'
+        ],
+        answer: 0,
+        explanation: 'An artificial pacemaker delivers controlled electrical impulses to stimulate the heart muscle to contract at a regular, healthy rate.'
+      },
+      {
+        id: 63,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Heart, Blood Vessels & Blood',
+        isPractical: false,
+        question: 'How is the structure of an artery adapted to its function of carrying blood away from the heart at high pressure?',
+        options: [
+          'Thick walls containing strong muscle and elastic fibres to withstand high pressure and stretch/recoil, with a relatively narrow lumen',
+          'Very thin walls only one cell thick to allow rapid diffusion',
+          'Thin walls, a wide lumen, and pocket valves along its length',
+          'Hollow dead tubes reinforced with rings of lignin'
+        ],
+        answer: 0,
+        explanation: 'Arteries have thick muscular and elastic walls to withstand surges of high-pressure blood from the ventricles and maintain pressure by elastic recoil.'
+      },
+      {
+        id: 64,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Heart, Blood Vessels & Blood',
+        isPractical: false,
+        question: 'How are capillaries adapted for the efficient exchange of substances (such as oxygen, glucose, and carbon dioxide) with body tissues?',
+        options: [
+          'Walls only one cell thick (giving a very short diffusion pathway) and permeable walls forming a dense branching network close to every cell',
+          'Thick layers of smooth muscle and elastic tissue',
+          'A wide lumen containing valves to prevent backflow',
+          'A waterproof waxy lining to stop plasma leaking out'
+        ],
+        answer: 0,
+        explanation: 'Capillaries have one-cell-thick permeable walls and a vast total surface area, allowing rapid diffusion between blood and tissue cells.'
+      },
+      {
+        id: 65,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Heart, Blood Vessels & Blood',
+        isPractical: false,
+        question: 'How does the structure of a vein compare to that of an artery?',
+        options: [
+          'Veins have thinner walls (less muscle and elastic tissue), a wider lumen (reducing resistance to low-pressure blood flow), and valves to prevent backflow',
+          'Veins have thicker muscular walls and no valves',
+          'Veins have walls that are only one cell thick',
+          'Veins carry blood at much higher pressure than arteries'
+        ],
+        answer: 0,
+        explanation: 'Because blood in veins is at low pressure, veins have a large lumen to ease flow, thinner walls, and valves to stop backflow.'
+      },
+      {
+        id: 66,
+        tiers: ['higher', 'separate'],
+        topic: 'Heart, Blood Vessels & Blood',
+        isPractical: false,
+        question: 'Calculate the cardiac output of an athlete whose heart rate is 140 beats per minute and whose stroke volume is 110 cm³ per beat. (Cardiac output = heart rate × stroke volume)',
+        options: ['15,400 cm³/min (15.4 dm³/min)', '1.27 cm³/min', '250 cm³/min', '1,540 cm³/min'],
+        answer: 0,
+        explanation: 'Cardiac output = heart rate × stroke volume = 140 beats/min × 110 cm³ = 15,400 cm³/min (or 15.4 litres/min).'
+      },
+      {
+        id: 67,
+        tiers: ['higher', 'separate'],
+        topic: 'Heart, Blood Vessels & Blood',
+        isPractical: false,
+        question: 'In 20 seconds, 1,200 cm³ of blood flows through a major blood vessel. What is the rate of blood flow in cm³/min?',
+        options: ['3,600 cm³/min', '60 cm³/min', '400 cm³/min', '24,000 cm³/min'],
+        answer: 0,
+        explanation: '20 seconds is 1/3 of a minute, so in 60 seconds (1 minute) the volume flowing is 1,200 × 3 = 3,600 cm³/min.'
+      },
+      {
+        id: 68,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Heart, Blood Vessels & Blood',
+        isPractical: false,
+        question: 'What is the main function of blood plasma?',
+        options: [
+          'Transporting blood cells, dissolved carbon dioxide, urea, hormones, antibodies, and soluble products of digestion (glucose and amino acids)',
+          'Carrying oxygen bound to haemoglobin',
+          'Engulfing and digesting invading bacteria by phagocytosis',
+          'Forming scabs over cuts in the skin'
+        ],
+        answer: 0,
+        explanation: 'Plasma is the pale yellow liquid part of blood that suspends blood cells and transports dissolved substances including CO₂, urea, nutrients, hormones, and proteins.'
+      },
+      {
+        id: 69,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Heart, Blood Vessels & Blood',
+        isPractical: false,
+        question: 'Which three structural adaptations allow red blood cells to carry oxygen efficiently?',
+        options: [
+          'Contain haemoglobin to bind oxygen, have no nucleus (leaving more space for haemoglobin), and have a biconcave disc shape giving a large surface area to volume ratio',
+          'Contain many chloroplasts, a large permanent vacuole, and a cellulose cell wall',
+          'Have a lobed nucleus, produce antitoxins, and engulf pathogens',
+          'Are small cell fragments with no nucleus that release clotting enzymes'
+        ],
+        answer: 0,
+        explanation: 'Red blood cells lack a nucleus to pack in more haemoglobin and have a biconcave shape that increases surface area for fast oxygen diffusion.'
+      },
+      {
+        id: 70,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Heart, Blood Vessels & Blood',
+        isPractical: false,
+        question: 'What happens in the lungs and in respiring body tissues involving haemoglobin?',
+        options: [
+          'In the lungs, oxygen binds to haemoglobin to form oxyhaemoglobin; in body tissues, oxyhaemoglobin splits back into haemoglobin and oxygen for cells',
+          'In the lungs, carbon dioxide binds to haemoglobin; in body tissues, oxygen is destroyed',
+          'Haemoglobin converts glucose directly into lactic acid in the lungs',
+          'Haemoglobin clots blood when exposed to oxygen in the alveoli'
+        ],
+        answer: 0,
+        explanation: 'Haemoglobin reversibly binds oxygen in high-oxygen environments (lungs → oxyhaemoglobin) and releases it in low-oxygen respiring tissues.'
+      },
+      {
+        id: 71,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Heart, Blood Vessels & Blood',
+        isPractical: false,
+        question: 'How do white blood cells defend the body against infectious pathogens?',
+        options: [
+          'By engulfing and digesting pathogens (phagocytosis), producing specific antibodies, and producing antitoxins',
+          'By carrying oxygen to infected cells using haemoglobin',
+          'By forming a hard cellulose wall around the wound',
+          'By pumping blood faster through the coronary arteries'
+        ],
+        answer: 0,
+        explanation: 'White blood cells (which have a nucleus) protect against disease via phagocytosis, antibody production, and antitoxin secretion.'
+      },
+      {
+        id: 72,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Heart, Blood Vessels & Blood',
+        isPractical: false,
+        question: 'What are platelets and what is their function in the blood?',
+        options: [
+          'Small fragments of cells with no nucleus that help blood to clot at a wound, stopping bleeding and preventing microorganisms from entering',
+          'Large white blood cells that produce antibodies against viruses',
+          'Biconcave cells filled with haemoglobin that transport oxygen',
+          'Dissolved proteins in plasma that transport urea to the kidneys'
+        ],
+        answer: 0,
+        explanation: 'Platelets are cell fragments without a nucleus that trigger blood clotting at cuts, preventing excessive blood loss and entry of pathogens.'
+      },
+      {
+        id: 73,
+        tiers: ['higher', 'separate'],
+        topic: 'Heart, Blood Vessels & Blood',
+        isPractical: false,
+        question: 'Why does a person with a dangerously low platelet count (thrombocytopenia) face serious health risks?',
+        options: [
+          'Their blood cannot clot properly, leading to excessive bleeding and bruising from minor injuries and increased risk of infection through open wounds',
+          'Their blood cannot transport oxygen from the alveoli to muscle cells',
+          'Their white blood cells cannot produce antibodies against measles',
+          'Their blood glucose concentration rises uncontrollably'
+        ],
+        answer: 0,
+        explanation: 'Without sufficient platelets, the clotting cascade fails to seal damaged blood vessels rapidly, causing prolonged bleeding and vulnerability to pathogen entry.'
+      },
+      {
+        id: 74,
+        tiers: ['higher', 'separate'],
+        topic: 'Heart, Blood Vessels & Blood',
+        isPractical: false,
+        question: 'During a blood count, a sample contains 4.8 × 10⁶ red blood cells per mm³ and 8.0 × 10³ white blood cells per mm³. What is the ratio of red blood cells to white blood cells?',
+        options: ['600 : 1', '60 : 1', '6,000 : 1', '1 : 600'],
+        answer: 0,
+        explanation: '(4.8 × 10⁶) ÷ (8.0 × 10³) = 0.6 × 10³ = 600. So the ratio is 600 : 1.'
+      },
+
+      // -------------------- CHD, HEALTH ISSUES & CANCER (18) --------------------
+      {
+        id: 75,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'CHD & Non-Communicable Diseases',
+        isPractical: false,
+        question: 'What causes coronary heart disease (CHD)?',
+        options: [
+          'Layers of fatty material build up inside the coronary arteries, narrowing them and reducing blood flow (oxygen and glucose) to the heart muscle',
+          'A viral infection destroys the valves in the veins of the legs',
+          'The aorta bursts due to low blood pressure',
+          'Too many red blood cells block the pulmonary vein'
+        ],
+        answer: 0,
+        explanation: 'In CHD, fatty deposits (atheroma/plaques) narrow the lumen of coronary arteries, starving cardiac muscle cells of oxygen needed for aerobic respiration, which can cause a heart attack.'
+      },
+      {
+        id: 76,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'CHD & Non-Communicable Diseases',
+        isPractical: false,
+        question: 'How does a stent treat a narrowed coronary artery?',
+        options: [
+          'A small wire-mesh tube is inserted into the narrowed artery and inflated with a balloon to hold the artery open so blood flows freely',
+          'It dissolves fatty plaques chemically in the liver',
+          'It slows down the resting heart rate using electrical pulses',
+          'It replaces a leaking heart valve with pig tissue'
+        ],
+        answer: 0,
+        explanation: 'A stent mechanically props open a narrowed coronary artery, restoring blood flow to the heart muscle with a relatively fast recovery time.'
+      },
+      {
+        id: 77,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'CHD & Non-Communicable Diseases',
+        isPractical: false,
+        question: 'What are statins and how do they reduce the risk of heart attacks and strokes?',
+        options: [
+          'Drugs that lower blood cholesterol levels, slowing down the rate at which fatty material is deposited in coronary arteries',
+          'Surgical wire tubes placed inside the aorta',
+          'Hormones injected to lower blood glucose concentration',
+          'Antibiotics used to kill bacteria living on heart valves'
+        ],
+        answer: 0,
+        explanation: 'Statins reduce LDL ("bad") cholesterol synthesis in the liver, slowing fatty plaque formation in arteries, though they must be taken long-term and can cause side effects.'
+      },
+      {
+        id: 78,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'CHD & Non-Communicable Diseases',
+        isPractical: false,
+        question: 'Compare mechanical heart valves and biological heart valves used to treat faulty valves.',
+        options: [
+          'Mechanical valves last a very long time (almost permanent) but require lifelong anti-clotting medication; biological valves do not require anti-clotting drugs but wear out and need replacing after 10–15 years',
+          'Biological valves last forever without replacement, whereas mechanical valves dissolve after two years',
+          'Neither type of valve requires surgery to implant',
+          'Mechanical valves are grown from plant meristem cells'
+        ],
+        answer: 0,
+        explanation: 'Mechanical valves (titanium/polymers) are durable but increase blood clot risk (requiring daily anticoagulants); biological valves (from pigs/cows/human donors) avoid clotting drugs but degrade over time.'
+      },
+      {
+        id: 79,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'CHD & Non-Communicable Diseases',
+        isPractical: false,
+        question: 'What is the main role of an artificial heart in treating severe heart failure?',
+        options: [
+          'Usually used as a temporary measure to keep a patient alive while waiting for a donor heart transplant, or to allow a damaged heart to rest and recover',
+          'It permanently cures coronary heart disease without needing surgery',
+          'It produces new red blood cells and platelets for the patient',
+          'It filters urea out of the blood instead of the kidneys'
+        ],
+        answer: 0,
+        explanation: 'Artificial hearts are less likely to be rejected by the immune system than donor transplants, but parts can wear out and blood clots can form, so they are mainly a bridge to transplant.'
+      },
+      {
+        id: 80,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'CHD & Non-Communicable Diseases',
+        isPractical: false,
+        question: 'How is "health" defined in biology?',
+        options: [
+          'The state of physical and mental well-being (not merely the absence of disease)',
+          'Having no bacterial or viral infections',
+          'Having a resting heart rate below 60 beats per minute',
+          'Never experiencing stress or tiredness'
+        ],
+        answer: 0,
+        explanation: 'Health is defined as the state of physical and mental well-being. Both communicable and non-communicable diseases, diet, stress, and life situations affect health.'
+      },
+      {
+        id: 81,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'CHD & Non-Communicable Diseases',
+        isPractical: false,
+        question: 'Give an example of how different types of disease can interact in the human body.',
+        options: [
+          'Defects in the immune system mean an individual is more likely to suffer from infectious diseases, or severe physical ill health can lead to depression and mental illness',
+          'Catching a cold immediately cures Type 2 diabetes',
+          'Breaking a bone makes a person immune to measles',
+          'Eating a balanced diet causes viruses to mutate into bacteria'
+        ],
+        answer: 0,
+        explanation: 'Diseases interact: e.g. HIV weakens the immune system increasing susceptibility to tuberculosis; HPV infection can trigger cervical cancer; severe physical illness can trigger mental health issues.'
+      },
+      {
+        id: 82,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'CHD & Non-Communicable Diseases',
+        isPractical: false,
+        question: 'Which statement accurately explains the difference between "correlation" and "causation" when studying disease risk factors?',
+        options: [
+          'A correlation shows a statistical link/pattern between two variables, whereas causation means one factor directly produces the biological change that causes the disease',
+          'Correlation and causation mean the exact same thing in science',
+          'Causation can be proved simply by drawing a scatter graph',
+          'Correlation proves there are no other lifestyle factors involved'
+        ],
+        answer: 0,
+        explanation: 'Correlation between a risk factor and a disease does not automatically prove causation; scientists must establish a causal biological mechanism.'
+      },
+      {
+        id: 83,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'CHD & Non-Communicable Diseases',
+        isPractical: false,
+        question: 'What are the proven effects of smoking on cardiovascular disease and lung health?',
+        options: [
+          'Chemicals in cigarette smoke damage artery linings (leading to fatty plaques/CHD) and carbon monoxide reduces oxygen-carrying capacity of blood, while carcinogens cause lung cancer',
+          'Smoking increases lung surface area and lowers blood pressure',
+          'Nicotine strengthens heart valves and prevents blood clots',
+          'Smoking only affects the digestive system and never harms the heart'
+        ],
+        answer: 0,
+        explanation: 'Smoking damages endothelial linings of arteries, increases blood pressure/heart rate, reduces blood oxygen via carbon monoxide, and introduces carcinogens into the lungs.'
+      },
+      {
+        id: 84,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'CHD & Non-Communicable Diseases',
+        isPractical: false,
+        question: 'Obesity is a major lifestyle risk factor for which non-communicable metabolic disease?',
+        options: ['Type 2 diabetes', 'Type 1 diabetes', 'Malaria', 'Measles'],
+        answer: 0,
+        explanation: 'Obesity is strongly linked to Type 2 diabetes (where body cells stop responding properly to insulin).'
+      },
+      {
+        id: 85,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'CHD & Non-Communicable Diseases',
+        isPractical: false,
+        question: 'What are the health effects of excessive alcohol consumption on the liver, brain, and an unborn fetus?',
+        options: [
+          'Causes liver cirrhosis/damage and impaired brain function in adults, and can cause fetal alcohol syndrome (developmental damage) if consumed during pregnancy',
+          'Increases bone density and improves memory',
+          'Prevents fatty deposits from forming in the liver',
+          'Has no effect on a developing fetus because the placenta blocks all alcohol'
+        ],
+        answer: 0,
+        explanation: 'Alcohol is broken down by the liver (excess causes cirrhosis/liver cancer), damages brain tissue, and crosses the placenta harming fetal brain and body development.'
+      },
+      {
+        id: 86,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'CHD & Non-Communicable Diseases',
+        isPractical: false,
+        question: 'What is cancer?',
+        options: [
+          'The result of changes in cells that lead to uncontrolled growth and division by mitosis, forming a tumour',
+          'An infectious disease caused by bacteria multiplying in the lungs',
+          'A deficiency of vitamin C and iron in the diet',
+          'The normal differentiation of stem cells in bone marrow'
+        ],
+        answer: 0,
+        explanation: 'Cancer arises from genetic mutations in cells that disrupt normal cell cycle control, causing uncontrolled mitotic division and tumour growth.'
+      },
+      {
+        id: 87,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'CHD & Non-Communicable Diseases',
+        isPractical: false,
+        question: 'How do benign tumours differ from malignant tumours?',
+        options: [
+          'Benign tumours are growths of abnormal cells contained in one area (usually within a membrane) that do not invade other parts of the body; malignant tumours are cancers that invade neighbouring tissues and spread via the blood to form secondary tumours',
+          'Benign tumours spread rapidly around the body via the bloodstream, whereas malignant tumours never grow',
+          'Benign tumours are caused by bacteria, whereas malignant tumours are caused by fungi',
+          'Malignant tumours cannot divide by mitosis'
+        ],
+        answer: 0,
+        explanation: 'Benign tumours remain encapsulated in one site and do not metastasise; malignant tumours invade surrounding tissues and spread through the blood/lymph to form secondary tumours.'
+      },
+      {
+        id: 88,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'CHD & Non-Communicable Diseases',
+        isPractical: false,
+        question: 'What is a carcinogen?',
+        options: [
+          'Any agent (such as tar in tobacco smoke, UV light, asbestos, or ionising radiation) that causes mutations in DNA and increases the risk of cancer',
+          'A white blood cell that destroys malignant tumours',
+          'A drug used to lower blood cholesterol levels',
+          'An enzyme that digests carbohydrates in the small intestine'
+        ],
+        answer: 0,
+        explanation: 'Carcinogens (including chemical carcinogens like tar and physical agents like X-rays/UV/ionising radiation) damage DNA and trigger cancerous mutations.'
+      },
+      {
+        id: 89,
+        tiers: ['higher', 'separate'],
+        topic: 'CHD & Non-Communicable Diseases',
+        isPractical: false,
+        question: 'Give one example of a genetic risk factor that increases a person’s susceptibility to developing cancer.',
+        options: [
+          'Inheriting faulty alleles such as mutated BRCA1 or BRCA2 genes, which significantly increases the risk of breast and ovarian cancer',
+          'Catching the human papillomavirus (HPV) from another person',
+          'Exposing skin to excessive ultraviolet radiation on holiday',
+          'Inhaling asbestos fibres at work'
+        ],
+        answer: 0,
+        explanation: 'While many cancers are linked to lifestyle/environmental carcinogens or viruses, inherited mutations (such as BRCA genes for breast cancer) are genetic risk factors.'
+      },
+      {
+        id: 90,
+        tiers: ['higher', 'separate'],
+        topic: 'CHD & Non-Communicable Diseases',
+        isPractical: false,
+        question: 'Beyond personal suffering, what is the wider human and financial cost of non-communicable diseases (such as CHD and Type 2 diabetes) to society?',
+        options: [
+          'High healthcare costs for the NHS (treatments, hospital stays, lifelong medication) and lost economic productivity when people cannot work or families become full-time carers',
+          'Non-communicable diseases have zero financial cost because they are not infectious',
+          'They reduce the demand for hospital beds and doctors',
+          'They only affect elderly people who have retired'
+        ],
+        answer: 0,
+        explanation: 'Non-communicable diseases place immense financial strain on healthcare systems and reduce national income due to illness-related absence from work.'
+      },
+      {
+        id: 91,
+        tiers: ['higher', 'separate'],
+        topic: 'CHD & Non-Communicable Diseases',
+        isPractical: false,
+        question: 'During a clinical trial, a statin reduces the risk of a heart attack from 8.0% in the placebo group to 5.2% in the statin group. What is the relative percentage reduction in heart attack risk?',
+        options: ['35%', '2.8%', '65%', '28%'],
+        answer: 0,
+        explanation: 'Absolute reduction = 8.0% − 5.2% = 2.8%. Relative reduction = (2.8 ÷ 8.0) × 100 = 35%.'
+      },
+      {
+        id: 92,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'CHD & Non-Communicable Diseases',
+        isPractical: false,
+        question: 'Why might a doctor prescribe statins rather than immediately fitting a stent for a patient with moderately raised cholesterol and mild arterial narrowing?',
+        options: [
+          'Statins are non-invasive (no surgery required) and reduce cholesterol throughout the entire arterial system, avoiding surgical risks like bleeding or infection',
+          'Stents can only be fitted into veins, never arteries',
+          'Statins work instantly within five minutes of swallowing one tablet',
+          'Stents increase blood cholesterol levels'
+        ],
+        answer: 0,
+        explanation: 'Statins avoid the risks of surgery (bleeding, infection, thrombosis) and reduce plaque buildup systemically across all arteries, though they require patient compliance.'
+      },
+
+      // -------------------- PLANT TISSUES, ORGANS & SYSTEMS (16) --------------------
+      {
+        id: 93,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Plant Tissues & Transport',
+        isPractical: false,
+        question: 'How is the upper epidermis of a plant leaf adapted to its function?',
+        options: [
+          'It is transparent to allow light to pass through to the palisade mesophyll below, and is covered with a waterproof waxy cuticle to reduce water loss by evaporation',
+          'It is packed with hundreds of chloroplasts to absorb all sunlight at the surface',
+          'It contains hollow dead lignin tubes to transport water',
+          'It has large air spaces to store carbon dioxide'
+        ],
+        answer: 0,
+        explanation: 'The upper epidermis lacks chloroplasts (making it transparent so light reaches the palisade layer) and secretes a waxy cuticle to minimise water evaporation.'
+      },
+      {
+        id: 94,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Plant Tissues & Transport',
+        isPractical: false,
+        question: 'How is palisade mesophyll tissue adapted for maximum photosynthesis?',
+        options: [
+          'Cells are column-shaped, tightly packed near the upper surface of the leaf, and packed with numerous chloroplasts',
+          'Cells are dead and hollow with perforated sieve plates',
+          'Cells have long root hair extensions into the soil',
+          'Cells are widely spaced with large air pockets and very few chloroplasts'
+        ],
+        answer: 0,
+        explanation: 'Palisade mesophyll cells sit near the top of the leaf and contain abundant chloroplasts to absorb maximum light energy for photosynthesis.'
+      },
+      {
+        id: 95,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Plant Tissues & Transport',
+        isPractical: false,
+        question: 'What is the main adaptation of spongy mesophyll tissue in a leaf?',
+        options: [
+          'It contains large air spaces between loosely packed cells, increasing the surface area for rapid diffusion of gases (CO₂ and O₂) in and out of cells',
+          'It forms a hard woody bark around the stem',
+          'It transports dissolved sucrose from leaves to roots',
+          'It divides continuously by mitosis to lengthen the leaf'
+        ],
+        answer: 0,
+        explanation: 'The interconnected air spaces in the spongy mesophyll provide a large internal surface area for gas exchange between the stomata and photosynthetic cells.'
+      },
+      {
+        id: 96,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Plant Tissues & Transport',
+        isPractical: false,
+        question: 'What is the role of guard cells surrounding the stomata on the lower epidermis of a leaf?',
+        options: [
+          'They change shape (becoming turgid to open and flaccid to close) to control gas exchange and regulate water loss from the leaf',
+          'They pump mineral ions from the soil up into the stem',
+          'They secrete digestive enzymes to trap insects',
+          'They strengthen the leaf with spirals of lignin'
+        ],
+        answer: 0,
+        explanation: 'Guard cells regulate the size of the stomatal pores: opening during the day to let CO₂ in for photosynthesis, and closing at night or in drought to conserve water.'
+      },
+      {
+        id: 97,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Plant Tissues & Transport',
+        isPractical: false,
+        question: 'What is "transpiration" in plants?',
+        options: [
+          'The evaporation of water from the surfaces of mesophyll cells inside the leaf followed by diffusion of water vapour out through the stomata',
+          'The active transport of dissolved sugars from the leaves to the roots in phloem',
+          'The absorption of carbon dioxide through the waxy cuticle',
+          'The breakdown of glucose during aerobic respiration in roots'
+        ],
+        answer: 0,
+        explanation: 'Transpiration is the loss of water vapour from plant leaves by evaporation from cell surfaces and diffusion through open stomata, pulling the transpiration stream up the xylem.'
+      },
+      {
+        id: 98,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Plant Tissues & Transport',
+        isPractical: false,
+        question: 'How does increasing temperature affect the rate of transpiration in a plant?',
+        options: [
+          'It increases the rate of transpiration because water molecules gain kinetic energy and evaporate/diffuse out of the stomata faster',
+          'It decreases the rate of transpiration because stomata freeze shut',
+          'It has no effect on transpiration unless it is dark',
+          'It reverses the transpiration stream so water flows down into the soil'
+        ],
+        answer: 0,
+        explanation: 'Higher temperatures increase the kinetic energy of water molecules, speeding up evaporation from spongy mesophyll cells and diffusion out of the leaf.'
+      },
+      {
+        id: 99,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Plant Tissues & Transport',
+        isPractical: false,
+        question: 'How does high atmospheric humidity affect the rate of transpiration, and why?',
+        options: [
+          'High humidity decreases the rate of transpiration because it reduces the concentration gradient of water vapour between the inside of the leaf and the outside air',
+          'High humidity increases the rate of transpiration because water evaporates faster into wet air',
+          'High humidity causes guard cells to die',
+          'High humidity increases light intensity on the leaf'
+        ],
+        answer: 0,
+        explanation: 'When external air is humid, the difference in water vapour concentration inside vs outside the leaf is smaller, slowing net diffusion of water vapour.'
+      },
+      {
+        id: 100,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Plant Tissues & Transport',
+        isPractical: false,
+        question: 'Why does increased air movement (wind) increase the rate of transpiration?',
+        options: [
+          'Wind blows away water vapour molecules accumulating outside the stomata, maintaining a steep water vapour concentration gradient',
+          'Wind heats up the chloroplasts to 50 °C',
+          'Wind forces water directly into the upper epidermis',
+          'Wind closes all stomata on the lower epidermis'
+        ],
+        answer: 0,
+        explanation: 'Moving air sweeps away the moist boundary layer around the leaf, keeping external water vapour concentration low so diffusion out of stomata remains rapid.'
+      },
+      {
+        id: 101,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Plant Tissues & Transport',
+        isPractical: false,
+        question: 'Why does increasing light intensity increase the rate of transpiration?',
+        options: [
+          'Higher light intensity stimulates the stomata to open wider for photosynthesis, allowing more water vapour to diffuse out of the leaf',
+          'Light destroys the waxy cuticle on the upper epidermis',
+          'Light causes xylem vessels to contract and squeeze water out',
+          'Plants only respire when bright light shines on them'
+        ],
+        answer: 0,
+        explanation: 'In brighter light, stomata open wider to admit CO₂ for photosynthesis; a wider stomatal opening simultaneously increases water vapour loss.'
+      },
+      {
+        id: 102,
+        tiers: ['foundation', 'higher', 'separate'],
+        topic: 'Plant Tissues & Transport',
+        isPractical: false,
+        question: 'What is "translocation" in plants, and which tissue carries it out?',
+        options: [
+          'The movement of dissolved sugars (sucrose) made in photosynthesis from the leaves to other parts of the plant for immediate use or storage, carried out by living phloem tissue',
+          'The upward movement of water and mineral ions from roots to leaves in dead xylem vessels',
+          'The evaporation of water from guard cells into the atmosphere',
+          'The diffusion of oxygen through root hair cells'
+        ],
+        answer: 0,
+        explanation: 'Translocation is the bidirectional transport of dissolved sugars (cell sap) through living phloem sieve tubes to growing regions and storage organs.'
+      },
+      {
+        id: 103,
+        tiers: ['higher', 'separate'],
+        topic: 'Plant Tissues & Transport',
+        isPractical: false,
+        question: 'In a potometer experiment measuring water uptake by a leafy shoot, an air bubble moves 24 mm along a capillary tube of cross-sectional area 0.8 mm² in 12 minutes. Calculate the rate of water uptake in mm³/min.',
+        options: ['1.6 mm³/min', '2.0 mm³/min', '19.2 mm³/min', '30.0 mm³/min'],
+        answer: 0,
+        explanation: 'Volume of water taken up = distance × cross-sectional area = 24 mm × 0.8 mm² = 19.2 mm³. Rate = 19.2 mm³ ÷ 12 min = 1.6 mm³/min.'
+      },
+      {
+        id: 104,
+        tiers: ['higher', 'separate'],
+        topic: 'Plant Tissues & Transport',
+        isPractical: false,
+        question: 'Why should the stem of a plant shoot be cut underwater at a slant before inserting it into a potometer?',
+        options: [
+          'To prevent air bubbles from entering the xylem vessels and breaking the continuous column of water, while increasing surface area for water uptake',
+          'To sterilise the stem with water so bacteria cannot enter',
+          'To wash away chlorophyll from the stem',
+          'To stop translocation in the phloem'
+        ],
+        answer: 0,
+        explanation: 'Cutting underwater stops air locks forming in the xylem, which would block water flow up the shoot during the potometer measurement.'
+      },
+      {
+        id: 105,
+        tiers: ['separate'],
+        topic: 'Plant Tissues & Transport',
+        isPractical: false,
+        question: 'In Separate Biology, what symptom is seen in a plant suffering from a magnesium ion deficiency, and why?',
+        options: [
+          'Chlorosis (yellowing of the leaves) because magnesium ions are required to synthesise chlorophyll; without chlorophyll the plant makes less glucose by photosynthesis and has stunted growth',
+          'Purple spots on the stem because magnesium makes cellulose cell walls',
+          'Wilting of roots because magnesium is needed for osmosis',
+          'Excessive rapid growth because magnesium normally inhibits mitosis'
+        ],
+        answer: 0,
+        explanation: 'Magnesium ions are an essential component of the chlorophyll molecule. Magnesium deficiency causes chlorosis (yellow leaves), reducing photosynthesis and growth.'
+      },
+      {
+        id: 106,
+        tiers: ['separate'],
+        topic: 'Plant Tissues & Transport',
+        isPractical: false,
+        question: 'In Separate Biology, why does a deficiency of nitrate ions cause severely stunted growth in plants?',
+        options: [
+          'Nitrate ions are needed to convert sugars into amino acids for protein synthesis; without proteins, the plant cannot build new cells and tissues for growth',
+          'Nitrate ions form the green pigment chlorophyll inside chloroplasts',
+          'Nitrate ions strengthen dead xylem walls with lignin',
+          'Nitrate ions open and close the stomata at night'
+        ],
+        answer: 0,
+        explanation: 'Plants absorb nitrate ions from soil to combine with glucose and make amino acids, which are joined into proteins essential for growth.'
+      },
+      {
+        id: 107,
+        tiers: ['separate'],
+        topic: 'Plant Tissues & Transport',
+        isPractical: false,
+        question: 'Which three types of plant defence responses protect plants against pathogens and herbivores (Separate Biology)?',
+        options: [
+          'Physical barriers (cellulose cell walls, waxy cuticle, bark), chemical defences (antibacterial chemicals, poisons to deter herbivores), and mechanical adaptations (thorns, hairs, drooping/curling leaves, mimicry)',
+          'White blood cells, antibodies, and antitoxins circulating in the phloem',
+          'Mucus-secreting ciliated cells and stomach hydrochloric acid',
+          'Antibiotics produced by chloroplasts and vaccination via root hairs'
+        ],
+        answer: 0,
+        explanation: 'Plants lack an immune system with white blood cells; instead they rely on physical barriers, antimicrobial/toxic chemicals, and mechanical adaptations.'
+      },
+      {
+        id: 108,
+        tiers: ['separate'],
+        topic: 'Digestion & Enzymes',
+        isPractical: false,
+        question: 'In Separate Biology (linked to kidney/liver physiology), what happens to excess amino acids absorbed from protein digestion that the body cannot store?',
+        options: [
+          'In the liver, excess amino acids undergo deamination to remove the amino group, forming toxic ammonia which is immediately converted into safe urea for excretion by the kidneys',
+          'Excess amino acids are stored permanently inside the gall bladder',
+          'They are exhaled as nitrogen gas through the alveoli in the lungs',
+          'They are converted directly into cellulose in the small intestine'
+        ],
+        answer: 0,
+        explanation: 'Excess amino acids cannot be stored; the liver deaminates them into ammonia and converts ammonia into urea, which enters the blood to be filtered out by the kidneys.'
+      }
+    ];
+
+    // =========================================================================
+    // 2. STATE MANAGEMENT
+    // =========================================================================
+    let state = {
+      studentName: '',
+      studentEmail: '',
+      selectedTier: 'higher', // 'foundation' | 'higher' | 'separate'
+      selectedMode: 'all',    // 'all' | 'rp'
+      selectedCount: 20,
+      activeQuestions: [],
+      currentIndex: 0,
+      score: 0,
+      answeredCurrent: false,
+      userResponses: [],      // { questionObj, chosenIndex, isCorrect }
+      isMissedRetry: false
+    };
+
+    // =========================================================================
+    // 3. FILTERING & POOL HELPERS
+    // =========================================================================
+    function getFilteredPool(tier, mode) {
+      return QUESTION_BANK.filter(q => {
+        const tierMatch = Array.isArray(q.tiers) && q.tiers.includes(tier);
+        if (!tierMatch) return false;
+        if (mode === 'rp') return q.isPractical === true;
+        return true;
+      });
+    }
+
+    function shuffleArray(array) {
+      const copy = [...array];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    function prepareQuestionWithShuffledOptions(q) {
+      const indexed = q.options.map((text, idx) => ({
+        text,
+        isCorrect: idx === q.answer
+      }));
+      const shuffled = shuffleArray(indexed);
+      return {
+        ...q,
+        shuffledOptions: shuffled,
+        shuffledAnswerIndex: shuffled.findIndex(o => o.isCorrect)
+      };
+    }
+
+    // =========================================================================
+    // 4. START SCREEN UI INTERACTIONS
+    // =========================================================================
+    function selectTier(tier) {
+      state.selectedTier = tier;
+
+      document.querySelectorAll('.tier-btn').forEach(btn => {
+        const isSelected = btn.dataset.tier === tier;
+        const check = btn.querySelector('.tier-check');
+        if (isSelected) {
+          btn.classList.remove('border-slate-200', 'bg-slate-50');
+          btn.classList.add('border-teal-600', 'bg-teal-50/60', 'shadow-sm');
+          check.classList.remove('border-slate-300');
+          check.classList.add('border-teal-600', 'bg-teal-600');
+        } else {
+          btn.classList.add('border-slate-200', 'bg-slate-50');
+          btn.classList.remove('border-teal-600', 'bg-teal-50/60', 'shadow-sm');
+          check.classList.add('border-slate-300');
+          check.classList.remove('border-teal-600', 'bg-teal-600');
+        }
+      });
+
+      const rpDesc = document.getElementById('modeRpDesc');
+      if (tier === 'foundation') {
+        rpDesc.textContent = 'Focused practical drill: RP4 Food Tests (starch, sugars, protein, lipids) & RP5 Effect of pH on Amylase.';
+      } else {
+        rpDesc.textContent = 'Focused practical drill: RP4 Food Tests & RP5 Amylase pH (including 1000/t & 1/t rate calculations and error analysis).';
+      }
+
+      updateSetupLabels();
+    }
+
+    function selectMode(mode) {
+      state.selectedMode = mode;
+
+      const allBtn = document.getElementById('modeAllBtn');
+      const allIcon = document.getElementById('modeAllIcon');
+      const allCheck = document.getElementById('modeAllCheck');
+
+      const rpBtn = document.getElementById('modeRpBtn');
+      const rpIcon = document.getElementById('modeRpIcon');
+      const rpCheck = document.getElementById('modeRpCheck');
+
+      if (mode === 'all') {
+        allBtn.classList.remove('border-slate-200', 'bg-slate-50');
+        allBtn.classList.add('border-teal-600', 'bg-teal-50/60', 'shadow-sm');
+        allIcon.classList.remove('bg-slate-200', 'text-slate-700');
+        allIcon.classList.add('bg-teal-600', 'text-white');
+        allCheck.classList.remove('hidden');
+
+        rpBtn.classList.remove('border-amber-500', 'bg-amber-50', 'shadow-sm');
+        rpBtn.classList.add('border-slate-200', 'bg-amber-50/40');
+        rpIcon.classList.remove('bg-amber-500', 'text-white');
+        rpIcon.classList.add('bg-amber-100', 'text-amber-800');
+        rpCheck.classList.add('hidden');
+      } else {
+        rpBtn.classList.remove('border-slate-200', 'bg-amber-50/40');
+        rpBtn.classList.add('border-amber-500', 'bg-amber-50', 'shadow-sm');
+        rpIcon.classList.remove('bg-amber-100', 'text-amber-800');
+        rpIcon.classList.add('bg-amber-500', 'text-white');
+        rpCheck.classList.remove('hidden');
+
+        allBtn.classList.remove('border-teal-600', 'bg-teal-50/60', 'shadow-sm');
+        allBtn.classList.add('border-slate-200', 'bg-slate-50');
+        allIcon.classList.remove('bg-teal-600', 'text-white');
+        allIcon.classList.add('bg-slate-200', 'text-slate-700');
+        allCheck.classList.add('hidden');
+      }
+
+      updateSetupLabels();
+    }
+
+    function selectCount(count) {
+      state.selectedCount = count;
+      document.querySelectorAll('.count-btn').forEach(btn => {
+        const btnCount = parseInt(btn.dataset.count, 10);
+        if (btnCount === count) {
+          btn.classList.remove('border-slate-200', 'bg-slate-50', 'text-slate-800', 'hover:border-teal-400');
+          btn.classList.add('border-teal-600', 'bg-teal-600', 'text-white', 'shadow-sm');
+        } else {
+          btn.classList.add('border-slate-200', 'bg-slate-50', 'text-slate-800', 'hover:border-teal-400');
+          btn.classList.remove('border-teal-600', 'bg-teal-600', 'text-white', 'shadow-sm');
+        }
+      });
+      updateSetupLabels();
+    }
+
+    function updateSetupLabels() {
+      const tierNames = {
+        foundation: 'Foundation Tier',
+        higher: 'Higher Tier',
+        separate: 'Separate Biology'
+      };
+      const tierBadges = {
+        foundation: 'Combined Science Foundation Selected',
+        higher: 'Combined Science Higher Selected',
+        separate: 'Separate Biology (8461) Selected'
+      };
+
+      document.getElementById('tierCountHint').textContent = tierBadges[state.selectedTier];
+
+      const pool = getFilteredPool(state.selectedTier, state.selectedMode);
+      const poolText = document.getElementById('poolAvailabilityText');
+      if (state.selectedMode === 'rp') {
+        poolText.textContent = `${pool.length} unique Required Practical questions available`;
+      } else {
+        poolText.textContent = `${pool.length} unique questions available for ${tierNames[state.selectedTier]}`;
+      }
+
+      const startLabel = document.getElementById('startBtnLabel');
+      const actualCount = Math.min(state.selectedCount, pool.length);
+      if (state.selectedMode === 'rp') {
+        startLabel.textContent = `Start Required Practicals Quiz (${actualCount} Questions)`;
+      } else {
+        startLabel.textContent = `Start ${tierNames[state.selectedTier]} Quiz (${actualCount} Questions)`;
+      }
+    }
+
+    function clearValidationError() {
+      const input = document.getElementById('studentNameInput');
+      const alertBox = document.getElementById('validationAlert');
+      input.classList.remove('border-rose-500', 'bg-rose-50/40');
+      alertBox.classList.add('hidden');
+    }
+
+    function handleStartQuiz(event) {
+      event.preventDefault();
+      const nameInput = document.getElementById('studentNameInput');
+      const emailInput = document.getElementById('studentEmailInput');
+      const nameVal = nameInput.value.trim();
+
+      if (!nameVal) {
+        nameInput.classList.add('border-rose-500', 'bg-rose-50/40');
+        document.getElementById('validationAlert').classList.remove('hidden');
+        nameInput.focus();
+        return;
+      }
+
+      state.studentName = nameVal;
+      state.studentEmail = emailInput.value.trim();
+      state.isMissedRetry = false;
+
+      const pool = getFilteredPool(state.selectedTier, state.selectedMode);
+      const shuffledPool = shuffleArray(pool);
+      const chosenSlice = shuffledPool.slice(0, Math.min(state.selectedCount, shuffledPool.length));
+
+      launchQuizSession(chosenSlice);
+    }
+
+    // =========================================================================
+    // 5. QUIZ ENGINE
+    // =========================================================================
+    function launchQuizSession(rawQuestions) {
+      state.activeQuestions = rawQuestions.map(prepareQuestionWithShuffledOptions);
+      state.currentIndex = 0;
+      state.score = 0;
+      state.answeredCurrent = false;
+      state.userResponses = [];
+
+      document.getElementById('headerStudentName').textContent = state.studentName;
+      document.getElementById('headerControls').classList.remove('hidden');
+
+      document.getElementById('startScreen').classList.add('hidden');
+      document.getElementById('resultsScreen').classList.add('hidden');
+      document.getElementById('quizScreen').classList.remove('hidden');
+
+      renderCurrentQuestion();
+    }
+
+    function renderCurrentQuestion() {
+      const q = state.activeQuestions[state.currentIndex];
+      const total = state.activeQuestions.length;
+      const qNum = state.currentIndex + 1;
+      state.answeredCurrent = false;
+
+      const tierLabels = {
+        foundation: 'Foundation Tier',
+        higher: 'Higher Tier',
+        separate: 'Separate Biology'
+      };
+      const tierBadge = document.getElementById('quizTierBadge');
+      tierBadge.textContent = state.isMissedRetry ? 'Missed Questions Drill' : tierLabels[state.selectedTier];
+
+      document.getElementById('quizTopicBadge').textContent = q.topic;
+
+      const rpBadge = document.getElementById('quizRpBadge');
+      if (q.isPractical) {
+        rpBadge.classList.remove('hidden');
+      } else {
+        rpBadge.classList.add('hidden');
+      }
+
+      document.getElementById('questionCounterText').textContent = `Question ${qNum} of ${total}`;
+      document.getElementById('liveScoreText').textContent = state.score;
+      const pct = Math.round(((qNum - 1) / total) * 100);
+      document.getElementById('quizProgressBar').style.width = `${Math.max(4, pct)}%`;
+
+      document.getElementById('questionPrompt').textContent = q.question;
+      document.getElementById('feedbackBox').classList.add('hidden');
+
+      const container = document.getElementById('optionsContainer');
+      container.innerHTML = '';
+      const letters = ['A', 'B', 'C', 'D'];
+
+      q.shuffledOptions.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'option-card w-full text-left p-4 rounded-xl border-2 border-slate-200 bg-slate-50 hover:bg-teal-50/50 hover:border-teal-500 flex items-start gap-3.5 focus:outline-none';
+        btn.innerHTML = `
+          <span class="option-letter w-7 h-7 rounded-lg bg-white border border-slate-300 text-slate-700 font-extrabold text-xs flex items-center justify-center shrink-0 mt-0.5">
+            ${letters[idx]}
+          </span>
+          <span class="text-sm sm:text-base font-medium text-slate-800 leading-snug">
+            ${opt.text}
+          </span>
+        `;
+        btn.onclick = () => handleAnswerSelection(idx);
+        container.appendChild(btn);
+      });
+    }
+
+    function handleAnswerSelection(chosenIdx) {
+      if (state.answeredCurrent) return;
+      state.answeredCurrent = true;
+
+      const q = state.activeQuestions[state.currentIndex];
+      const isCorrect = chosenIdx === q.shuffledAnswerIndex;
+
+      if (isCorrect) {
+        state.score++;
+        document.getElementById('liveScoreText').textContent = state.score;
+      }
+
+      state.userResponses.push({
+        questionObj: q,
+        chosenIndex: chosenIdx,
+        isCorrect: isCorrect
+      });
+
+      const optionBtns = document.querySelectorAll('#optionsContainer .option-card');
+      optionBtns.forEach((btn, idx) => {
+        btn.disabled = true;
+        const letterBadge = btn.querySelector('.option-letter');
+        btn.classList.remove('hover:bg-teal-50/50', 'hover:border-teal-500', 'bg-slate-50', 'border-slate-200');
+
+        if (idx === q.shuffledAnswerIndex) {
+          btn.classList.add('bg-emerald-50', 'border-emerald-500');
+          letterBadge.classList.remove('bg-white', 'border-slate-300', 'text-slate-700');
+          letterBadge.classList.add('bg-emerald-600', 'border-emerald-600', 'text-white');
+        } else if (idx === chosenIdx && !isCorrect) {
+          btn.classList.add('bg-rose-50', 'border-rose-500');
+          letterBadge.classList.remove('bg-white', 'border-slate-300', 'text-slate-700');
+          letterBadge.classList.add('bg-rose-600', 'border-rose-600', 'text-white');
+        } else {
+          btn.classList.add('bg-slate-50', 'border-slate-200', 'opacity-60');
+        }
+      });
+
+      const feedbackBox = document.getElementById('feedbackBox');
+      const feedbackIcon = document.getElementById('feedbackIcon');
+      const feedbackHeading = document.getElementById('feedbackHeading');
+      const feedbackExplanation = document.getElementById('feedbackExplanation');
+
+      feedbackBox.classList.remove('hidden', 'bg-emerald-50/70', 'border-emerald-300', 'bg-rose-50/70', 'border-rose-300');
+      feedbackIcon.classList.remove('bg-emerald-600', 'bg-rose-600', 'text-white');
+
+      if (isCorrect) {
+        feedbackBox.classList.add('bg-emerald-50/70', 'border-emerald-300');
+        feedbackIcon.classList.add('bg-emerald-600', 'text-white');
+        feedbackIcon.textContent = '✓';
+        feedbackHeading.textContent = 'Correct! Mark Awarded';
+        feedbackHeading.className = 'font-extrabold text-base text-emerald-900';
+        feedbackExplanation.className = 'text-sm mt-1.5 leading-relaxed text-emerald-900/90';
+      } else {
+        feedbackBox.classList.add('bg-rose-50/70', 'border-rose-300');
+        feedbackIcon.classList.add('bg-rose-600', 'text-white');
+        feedbackIcon.textContent = '✕';
+        feedbackHeading.textContent = 'Incorrect — Review AQA Mark-Scheme Note';
+        feedbackHeading.className = 'font-extrabold text-base text-rose-900';
+        feedbackExplanation.className = 'text-sm mt-1.5 leading-relaxed text-rose-900/90';
+      }
+
+      feedbackExplanation.textContent = q.explanation;
+
+      const isLast = state.currentIndex === state.activeQuestions.length - 1;
+      document.getElementById('nextBtnText').textContent = isLast ? 'View Diagnostic Report' : 'Next Question';
+
+      const total = state.activeQuestions.length;
+      const pct = Math.round(((state.currentIndex + 1) / total) * 100);
+      document.getElementById('quizProgressBar').style.width = `${pct}%`;
+    }
+
+    function handleNextQuestion() {
+      if (state.currentIndex < state.activeQuestions.length - 1) {
+        state.currentIndex++;
+        renderCurrentQuestion();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        showDiagnosticReport();
+      }
+    }
+
+    // =========================================================================
+    // 6. DIAGNOSTIC REPORT & EXPORT
+    // =========================================================================
+    function estimateGcseGrade(pct, tier) {
+      if (tier === 'foundation') {
+        if (pct >= 80) return 'Grade 5';
+        if (pct >= 65) return 'Grade 4';
+        if (pct >= 50) return 'Grade 3';
+        if (pct >= 35) return 'Grade 2';
+        return 'Grade 1';
+      } else {
+        if (pct >= 85) return 'Grade 9';
+        if (pct >= 75) return 'Grade 8';
+        if (pct >= 65) return 'Grade 7';
+        if (pct >= 55) return 'Grade 6';
+        if (pct >= 45) return 'Grade 5';
+        if (pct >= 35) return 'Grade 4';
+        return 'Grade 3';
+      }
+    }
+
+    function showDiagnosticReport() {
+      document.getElementById('quizScreen').classList.add('hidden');
+      document.getElementById('resultsScreen').classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      const total = state.activeQuestions.length;
+      const pct = Math.round((state.score / total) * 100);
+
+      const tierNames = {
+        foundation: 'Foundation Tier',
+        higher: 'Higher Tier',
+        separate: 'Separate Biology'
+      };
+      const modeName = state.isMissedRetry
+        ? 'Targeted Missed Questions Retry'
+        : (state.selectedMode === 'rp' ? 'Required Practicals Only' : 'All Organisation Topics');
+
+      document.getElementById('reportStudentTitle').textContent = `Diagnostic Report: ${state.studentName}`;
+      document.getElementById('reportMetaSubtitle').textContent = `${tierNames[state.selectedTier]} • ${modeName}`;
+      document.getElementById('reportPercentage').textContent = `${pct}%`;
+      document.getElementById('reportFraction').textContent = `${state.score} / ${total} Correct`;
+      document.getElementById('reportGradeBadge').textContent = estimateGcseGrade(pct, state.selectedTier);
+
+      const missedItems = state.userResponses.filter(r => !r.isCorrect);
+      const retryBtn = document.getElementById('retryMissedBtn');
+      if (missedItems.length > 0) {
+        retryBtn.classList.remove('hidden');
+        document.getElementById('missedCountLabel').textContent = missedItems.length;
+      } else {
+        retryBtn.classList.add('hidden');
+      }
+
+      const topicMap = {};
+      state.userResponses.forEach(res => {
+        const t = res.questionObj.topic;
+        if (!topicMap[t]) {
+          topicMap[t] = { correct: 0, total: 0 };
+        }
+        topicMap[t].total++;
+        if (res.isCorrect) topicMap[t].correct++;
+      });
+
+      const breakdownContainer = document.getElementById('topicBreakdownContainer');
+      breakdownContainer.innerHTML = '';
+
+      Object.entries(topicMap).forEach(([topicName, stats]) => {
+        const topicPct = Math.round((stats.correct / stats.total) * 100);
+        let barColor = 'bg-emerald-500';
+        let badgeStyle = 'bg-emerald-100 text-emerald-800';
+        let statusLabel = 'Strong';
+
+        if (topicPct < 50) {
+          barColor = 'bg-rose-500';
+          badgeStyle = 'bg-rose-100 text-rose-800';
+          statusLabel = 'Revise Priority';
+        } else if (topicPct < 80) {
+          barColor = 'bg-amber-500';
+          badgeStyle = 'bg-amber-100 text-amber-800';
+          statusLabel = 'Developing';
+        }
+
+        const row = document.createElement('div');
+        row.className = 'p-4 rounded-xl bg-slate-50 border border-slate-200';
+        row.innerHTML = `
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+            <span class="font-bold text-sm text-slate-900">${topicName}</span>
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-bold px-2.5 py-0.5 rounded-full ${badgeStyle}">${statusLabel}</span>
+              <span class="text-xs font-extrabold text-slate-700">${stats.correct}/${stats.total} (${topicPct}%)</span>
+            </div>
+          </div>
+          <div class="w-full h-2.5 bg-slate-200 rounded-full overflow-hidden">
+            <div class="h-full ${barColor} rounded-full transition-all duration-500" style="width: ${topicPct}%;"></div>
+          </div>
+        `;
+        breakdownContainer.appendChild(row);
+      });
+
+      const reviewList = document.getElementById('questionReviewList');
+      reviewList.innerHTML = '';
+
+      state.userResponses.forEach((res, idx) => {
+        const q = res.questionObj;
+        const chosenText = q.shuffledOptions[res.chosenIndex].text;
+        const correctText = q.shuffledOptions[q.shuffledAnswerIndex].text;
+
+        const card = document.createElement('div');
+        card.className = `p-4 sm:p-5 rounded-xl border-2 ${res.isCorrect ? 'border-emerald-200 bg-emerald-50/30' : 'border-rose-200 bg-rose-50/30'}`;
+        card.innerHTML = `
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <span class="text-xs font-extrabold uppercase tracking-wider ${res.isCorrect ? 'text-emerald-700' : 'text-rose-700'}">
+              Question ${idx + 1} &bull; ${res.isCorrect ? 'Correct' : 'Incorrect'}
+            </span>
+            <span class="text-xs font-semibold text-slate-500">${q.topic}</span>
+          </div>
+          <p class="font-bold text-sm sm:text-base text-slate-900 mb-3">${q.question}</p>
+          <div class="space-y-1.5 text-xs sm:text-sm">
+            <p class="${res.isCorrect ? 'text-emerald-800 font-semibold' : 'text-rose-800 font-semibold'}">
+              Your answer: ${chosenText}
+            </p>
+            ${!res.isCorrect ? `<p class="text-emerald-800 font-bold">Correct answer: ${correctText}</p>` : ''}
+            <p class="text-slate-600 pt-1.5 border-t border-slate-200/80 mt-2">
+              <strong class="text-slate-800">Mark Scheme Note:</strong> ${q.explanation}
+            </p>
+          </div>
+        `;
+        reviewList.appendChild(card);
+      });
+
+      const summaryText = buildPlainTextReport();
+      const subject = encodeURIComponent(`AQA GCSE Organisation Quiz Results — ${state.studentName} (${pct}%)`);
+      const body = encodeURIComponent(summaryText);
+      const recipient = state.studentEmail ? encodeURIComponent(state.studentEmail) : '';
+      document.getElementById('emailResultsLink').href = `mailto:${recipient}?subject=${subject}&body=${body}`;
+    }
+
+    function buildPlainTextReport() {
+      const total = state.activeQuestions.length;
+      const pct = Math.round((state.score / total) * 100);
+      const estGrade = estimateGcseGrade(pct, state.selectedTier);
+      const tierNames = {
+        foundation: 'Foundation Tier',
+        higher: 'Higher Tier',
+        separate: 'Separate Biology'
+      };
+      const modeName = state.selectedMode === 'rp' ? 'Required Practicals Only' : 'All Organisation Topics';
+
+      const topicMap = {};
+      state.userResponses.forEach(res => {
+        const t = res.questionObj.topic;
+        if (!topicMap[t]) topicMap[t] = { correct: 0, total: 0 };
+        topicMap[t].total++;
+        if (res.isCorrect) topicMap[t].correct++;
+      });
+
+      const breakdownLines = Object.entries(topicMap)
+        .map(([t, s]) => `- ${t}: ${s.correct}/${s.total} (${Math.round((s.correct / s.total) * 100)}%)`)
+        .join('\n');
+
+      return [
+        `Mr Leek Science — AQA GCSE Organisation Revision Quiz`,
+        `Student: ${state.studentName}`,
+        `Pathway: ${tierNames[state.selectedTier]} | Focus: ${modeName}`,
+        `Overall Score: ${state.score} / ${total} (${pct}% — ${estGrade})`,
+        ``,
+        `Topic Breakdown:`,
+        breakdownLines
+      ].join('\n');
+    }
+
+    function copyResultsSummary() {
+      const text = buildPlainTextReport();
+      const tempArea = document.createElement('textarea');
+      tempArea.value = text;
+      tempArea.style.position = 'fixed';
+      tempArea.style.left = '-9999px';
+      document.body.appendChild(tempArea);
+      tempArea.select();
+      try {
+        document.execCommand('copy');
+        const label = document.getElementById('copyBtnLabel');
+        label.textContent = 'Copied to Clipboard ✓';
+        setTimeout(() => {
+          label.textContent = 'Copy Results Summary';
+        }, 2500);
+      } catch (err) {
+        // Fallback if blocked
+      }
+      document.body.removeChild(tempArea);
+    }
+
+    function startMissedQuestionsQuiz() {
+      const missedRaw = state.userResponses
+        .filter(r => !r.isCorrect)
+        .map(r => r.questionObj);
+
+      if (missedRaw.length === 0) return;
+      state.isMissedRetry = true;
+      launchQuizSession(shuffleArray(missedRaw));
+    }
+
+    // =========================================================================
+    // 7. NAVIGATION & MODAL HELPERS
+    // =========================================================================
+    function confirmReturnHome() {
+      const quizVisible = !document.getElementById('quizScreen').classList.contains('hidden');
+      if (quizVisible && state.userResponses.length > 0) {
+        document.getElementById('confirmModal').classList.remove('hidden');
+      } else {
+        returnToMenu();
+      }
+    }
+
+    function closeConfirmModal() {
+      document.getElementById('confirmModal').classList.add('hidden');
+    }
+
+    function returnToMenu() {
+      closeConfirmModal();
+      document.getElementById('quizScreen').classList.add('hidden');
+      document.getElementById('resultsScreen').classList.add('hidden');
+      document.getElementById('headerControls').classList.add('hidden');
+      document.getElementById('startScreen').classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      selectTier('higher');
+      selectMode('all');
+      selectCount(20);
+    });
+  </script>
+</body>
+</html>
